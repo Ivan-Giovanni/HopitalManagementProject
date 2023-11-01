@@ -63,7 +63,7 @@ class Hopital:
 
         # =============================================== DataFrame ========================================================= #
         Dataframe = Frame(self.root, bd=20, relief=RIDGE)
-        Dataframe.place(x=0, y=130, width=1440, height=400)
+        Dataframe.place(x=0, y=100, width=1440, height=350)
 
         DataframeLeft = LabelFrame(
             Dataframe,
@@ -73,7 +73,7 @@ class Hopital:
             font=("times new roman", 17, "bold"),
             text="Informations du Patient",
         )
-        DataframeLeft.place(x=0, y=5, width=980, height=350)
+        DataframeLeft.place(x=0, y=5, width=980, height=300)
 
         DataframeRight = LabelFrame(
             Dataframe,
@@ -83,15 +83,19 @@ class Hopital:
             font=("times new roman", 17, "bold"),
             text="Prescription",
         )
-        DataframeRight.place(x=990, y=5, width=400, height=350)
+        DataframeRight.place(x=990, y=5, width=400, height=300)
+
+        # =======================================SearchBar frame============================================================== #
+        SearchBarframe = Frame(self.root, bd=20, relief=RIDGE)
+        SearchBarframe.place(x=0, y=430, width=1440, height=70)
 
         # =======================================Buttons frame============================================================== #
         Buttonframe = Frame(self.root, bd=20, relief=RIDGE)
-        Buttonframe.place(x=0, y=530, width=1440, height=80)
+        Buttonframe.place(x=0, y=500, width=1440, height=80)
 
         # =======================================Details frame============================================================== #
         Detailsframe = Frame(self.root, bd=20, relief=RIDGE)
-        Detailsframe.place(x=0, y=600, width=1440, height=190)
+        Detailsframe.place(x=0, y=570, width=1440, height=220)
 
         # =======================================DataframeLeft============================================================== #
         # ===================================== #
@@ -279,6 +283,53 @@ class Hopital:
         )
         texteNombreDeNuits.grid(row=6, column=3)
 
+        # ======================================= DataframeRight ================================================= #
+        self.textePrescription = Text(
+            DataframeRight,
+            font=("arial", 14, "bold"),
+            width=44,
+            height=18.4,
+            padx=2,
+            pady=6,
+        )
+        self.textePrescription.grid(row=0, column=0)
+
+        # ======================================= Boutons =========================================================== #
+        # ===================================== #
+        boutonEnregistrer = Button(
+            Buttonframe,
+            text="Enregistrer",
+            bg="#00FF00",
+            fg="blue",
+            font=("arial", 12, "bold"),
+            width=27,
+            height=2,
+        )
+        boutonEnregistrer.grid(row=0, column=0)
+
+        # ===================================== #
+        boutonRechercher = Button(
+            Buttonframe,
+            text="Rechercher",
+            bg="#00FF00",
+            fg="blue",
+            font=("arial", 12, "bold"),
+            width=27,
+            height=2,
+        )
+        boutonRechercher.grid(row=0, column=1)
+
+        # ===================================== #
+        boutonModifier = Button(
+            Buttonframe,
+            text="Modifier",
+            bg="#00FF00",
+            fg="blue",
+            font=("arial", 12, "bold"),
+            width=27,
+            height=2,
+        )
+        boutonModifier.grid(row=0, column=2)
 
 
 # ================== Déclaration de notre TKinter====================#
