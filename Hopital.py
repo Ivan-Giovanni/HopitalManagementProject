@@ -30,3 +30,5 @@ class Hopital:
 root = Tk()
 ob = Hopital(root)
 root.mainloop()
+
+print(2)
