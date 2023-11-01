@@ -1,13 +1,32 @@
-print(2)
+from tkinter import *
+from tkinter import ttk
+from tkinter import messagebox
+import mysql.connector
 
-print(3)
 
-print("Je mange")
+# ============================================= Définition de la classe Hopital ====================================================#
 
-print("Je bois")
+class Hopital:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Hopital Les Génies Management System")
+        self.root.geometry("1540x800+0+0")
 
-print("Je joue maintenant")
+        self.nameOfTablets = StringVar()
+        self.ref = StringVar()
+        self.dose = StringVar()
+        self.numberOfTablets = StringVar()
+        self.lot = StringVar()
+        self.issueDate = StringVar()
+        self.expDate = StringVar()
+        self.dailyDose = StringVar()
+        self.storageAdvice = StringVar()
+        self.nhsNumber = StringVar()
+        self.patientName = StringVar()
+        self.dateOfBirth = StringVar()
+        self.patientAddress = StringVar()
 
-print("Je dors maintenant")
 
-print("Je fais mes devoirs")
+root = Tk()
+ob = Hopital(root)
+root.mainloop()
