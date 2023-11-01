@@ -288,7 +288,7 @@ class Hopital:
             DataframeRight,
             font=("arial", 14, "bold"),
             width=44,
-            height=18.4,
+            height=15,
             padx=2,
             pady=6,
         )
