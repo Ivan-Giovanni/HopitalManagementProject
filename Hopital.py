@@ -32,3 +32,5 @@ ob = Hopital(root)
 root.mainloop()
 
 print(2)
+
+print(3)
