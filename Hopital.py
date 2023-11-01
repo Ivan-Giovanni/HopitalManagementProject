@@ -13,7 +13,7 @@ class Hopital:
         self.root.title("Hopital Les Génies Management System")
         self.root.geometry("1540x800+0+0")
 
-        # =========== Déclaration des variables ========================#
+        # =========== Déclaration des variables ======================== #
         self.service = StringVar()
         self.numeroDImmatriculation = StringVar()
         self.nom = StringVar()
@@ -62,6 +62,38 @@ class Hopital:
         lbltitle.pack(side=TOP, fill=X)
 
         # =============================================== DataFrame ========================================================= #
+        Dataframe = Frame(self.root, bd=20, relief=RIDGE)
+        Dataframe.place(x=0, y=130, width=1440, height=400)
+
+        DataframeLeft = LabelFrame(
+            Dataframe,
+            bd=10,
+            relief=RIDGE,
+            padx=10,
+            font=("times new roman", 17, "bold"),
+            text="Informations du Patient",
+        )
+        DataframeLeft.place(x=0, y=5, width=980, height=350)
+
+        DataframeRight = LabelFrame(
+            Dataframe,
+            bd=10,
+            relief=RIDGE,
+            padx=10,
+            font=("times new roman", 17, "bold"),
+            text="Prescription",
+        )
+        DataframeRight.place(x=990, y=5, width=400, height=350)
+
+        # =======================================Buttons frame============================================================== #
+        Buttonframe = Frame(self.root, bd=20, relief=RIDGE)
+        Buttonframe.place(x=0, y=530, width=1440, height=80)
+
+        # =======================================Details frame============================================================== #
+        Detailsframe = Frame(self.root, bd=20, relief=RIDGE)
+        Detailsframe.place(x=0, y=600, width=1440, height=190)
+
+        # =======================================DataframeLeft============================================================== #
 
 
 # ================== Déclaration de notre TKinter====================#
