@@ -94,6 +94,7 @@ class Hopital:
         Detailsframe.place(x=0, y=600, width=1440, height=190)
 
         # =======================================DataframeLeft============================================================== #
+        # ===================================== #
         labelService = Label(
             DataframeLeft,
             text="Service",
@@ -108,7 +109,7 @@ class Hopital:
             textvariable=self.service,
             state="readonly",
             font=("arial", 15, "bold"),
-            width=33,
+            width=30,
         )
         comboBoxService["value"] = (
             "Service de Consultation",
@@ -116,6 +117,168 @@ class Hopital:
         )
         comboBoxService.current(0)
         comboBoxService.grid(row=0, column=1)
+
+        # ===================================== #
+        labelNumeroDImmatriculation = Label(
+            DataframeLeft, font=("arial", 15, "bold"), text="N° d'Immatriculation", padx=2
+        )
+        labelNumeroDImmatriculation.grid(row=1, column=0, sticky=W)
+        texteNumeroDImmatriculation = Entry(
+            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.numeroDImmatriculation, width=35
+        )
+        texteNumeroDImmatriculation.grid(row=1, column=1)
+
+        # ===================================== #
+        labelNom = Label(
+            DataframeLeft, font=("arial", 15, "bold"), text="Nom", padx=2
+        )
+        labelNom.grid(row=2, column=0, sticky=W)
+        texteNom = Entry(
+            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.nom, width=35
+        )
+        texteNom.grid(row=2, column=1)
+
+        # ===================================== #
+        labelPrenom = Label(
+            DataframeLeft, font=("arial", 15, "bold"), text="Prenom", padx=2
+        )
+        labelPrenom.grid(row=3, column=0, sticky=W)
+        textePrenom = Entry(
+            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.prenom, width=35
+        )
+        textePrenom.grid(row=3, column=1)
+
+        # ===================================== #
+        labelAdresse = Label(
+            DataframeLeft, font=("arial", 15, "bold"), text="Adresse", padx=2
+        )
+        labelAdresse.grid(row=4, column=0, sticky=W)
+        texteAdresse = Entry(
+            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.adresse, width=35
+        )
+        texteAdresse.grid(row=4, column=1)
+
+        # ===================================== #
+        labelAge = Label(
+            DataframeLeft, font=("arial", 15, "bold"), text="Age", padx=2
+        )
+        labelAge.grid(row=5, column=0, sticky=W)
+        texteAge = Entry(
+            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.age, width=35
+        )
+        texteAge.grid(row=5, column=1)
+
+        # ===================================== #
+        labelSexe = Label(
+            DataframeLeft,
+            text="Sexe",
+            font=("arial", 15, "bold"),
+            padx=2,
+            pady=6,
+        )
+        labelSexe.grid(row=6, column=0, sticky=W)
+
+        comboBoxSexe = ttk.Combobox(
+            DataframeLeft,
+            textvariable=self.sexe,
+            state="readonly",
+            font=("arial", 15, "bold"),
+            width=30,
+        )
+        comboBoxSexe["value"] = (
+            "Feminin",
+            "Masculin"
+        )
+        comboBoxSexe.current(0)
+        comboBoxSexe.grid(row=6, column=1)
+
+        # ===================================== #
+        labelDescriptionDeLaMaladie = Label(
+            DataframeLeft, font=("arial", 15, "bold"), text="Description", padx=2
+        )
+        labelDescriptionDeLaMaladie.grid(row=0, column=2, sticky=W)
+        textlDescriptionDeLaMaladie = Entry(
+            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.descriptionDeLaMaladie, width=35
+        )
+        textlDescriptionDeLaMaladie.grid(row=0, column=3)
+
+        # ===================================== #
+        labelNumeroDeLaChambre = Label(
+            DataframeLeft, font=("arial", 15, "bold"), text="N° Chambre", padx=2
+        )
+        labelNumeroDeLaChambre.grid(row=1, column=2, sticky=W)
+        texteNumeroDeLaChambre = Entry(
+            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.age, width=35
+        )
+        texteNumeroDeLaChambre.grid(row=1, column=3)
+
+        # ===================================== #
+        labelSpecialiteDuMedecin = Label(
+            DataframeLeft,
+            text="Specialite",
+            font=("arial", 15, "bold"),
+            padx=2,
+            pady=6,
+        )
+        labelSpecialiteDuMedecin.grid(row=2, column=2, sticky=W)
+
+        comboBoxSpecialiteDuMedecin = ttk.Combobox(
+            DataframeLeft,
+            textvariable=self.specialiteDuMedecin,
+            state="readonly",
+            font=("arial", 15, "bold"),
+            width=30,
+        )
+        comboBoxSpecialiteDuMedecin["value"] = (
+            "Gynecologie",
+            "Chirurgie",
+            "Gastrologie",
+            "Radiologie",
+            "Generale"
+        )
+        comboBoxSpecialiteDuMedecin.current(4)
+        comboBoxSpecialiteDuMedecin.grid(row=2, column=3)
+
+        # ===================================== #
+        labelCoordonneDuMedecin = Label(
+            DataframeLeft, font=("arial", 15, "bold"), text="Coordonnees du Med.", padx=2
+        )
+        labelCoordonneDuMedecin.grid(row=3, column=2, sticky=W)
+        texteCoordonneDuMedecin = Entry(
+            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.coordoneeDuMedecin, width=35
+        )
+        texteCoordonneDuMedecin.grid(row=3, column=3)
+
+        # ===================================== #
+        labelDate = Label(
+            DataframeLeft, font=("arial", 15, "bold"), text="Date", padx=2
+        )
+        labelDate.grid(row=4, column=2, sticky=W)
+        texteDate = Entry(
+            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.date, width=35
+        )
+        texteDate.grid(row=4, column=3)
+
+        # ===================================== #
+        labelHeure = Label(
+            DataframeLeft, font=("arial", 15, "bold"), text="Heure", padx=2
+        )
+        labelHeure.grid(row=5, column=2, sticky=W)
+        texteHeure = Entry(
+            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.heure, width=35
+        )
+        texteHeure.grid(row=5, column=3)
+
+        # ===================================== #
+        labelNombreDeNuits = Label(
+            DataframeLeft, font=("arial", 15, "bold"), text="Nombre de nuits", padx=2
+        )
+        labelNombreDeNuits.grid(row=6, column=2, sticky=W)
+        texteNombreDeNuits = Entry(
+            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.nombreDeNuits, width=35
+        )
+        texteNombreDeNuits.grid(row=6, column=3)
+
 
 
 # ================== Déclaration de notre TKinter====================#
