@@ -50,7 +50,7 @@ class Hopital:
         )
 
         # =========== On formatte le titre ========================= #
-        lbltitle = Label(
+        labeltitle = Label(
             self.root,
             bd=20,
             relief=RIDGE,
@@ -59,7 +59,7 @@ class Hopital:
             bg="white",
             font=("times new roman", 50, "bold"),
         )
-        lbltitle.pack(side=TOP, fill=X)
+        labeltitle.pack(side=TOP, fill=X)
 
         # =============================================== DataFrame ========================================================= #
         Dataframe = Frame(self.root, bd=20, relief=RIDGE)
@@ -94,6 +94,28 @@ class Hopital:
         Detailsframe.place(x=0, y=600, width=1440, height=190)
 
         # =======================================DataframeLeft============================================================== #
+        labelService = Label(
+            DataframeLeft,
+            text="Service",
+            font=("arial", 15, "bold"),
+            padx=2,
+            pady=6,
+        )
+        labelService.grid(row=0, column=0, sticky=W)
+
+        comboBoxService = ttk.Combobox(
+            DataframeLeft,
+            textvariable=self.service,
+            state="readonly",
+            font=("arial", 15, "bold"),
+            width=33,
+        )
+        comboBoxService["value"] = (
+            "Service de Consultation",
+            "Service d'urgence"
+        )
+        comboBoxService.current(0)
+        comboBoxService.grid(row=0, column=1)
 
 
 # ================== Déclaration de notre TKinter====================#
