@@ -9,3 +9,5 @@ print("Je bois")
 print("Je joue maintenant")
 
 print("Je dors maintenant")
+
+print("Je fais mes devoirs")
