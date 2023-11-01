@@ -302,7 +302,7 @@ class Hopital:
             bg="#00FF00",
             fg="blue",
             font=("arial", 12, "bold"),
-            width=27,
+            width=23,
             height=2,
         )
         boutonEnregistrer.grid(row=0, column=0)
@@ -314,7 +314,7 @@ class Hopital:
             bg="#00FF00",
             fg="blue",
             font=("arial", 12, "bold"),
-            width=27,
+            width=22,
             height=2,
         )
         boutonRechercher.grid(row=0, column=1)
@@ -326,10 +326,106 @@ class Hopital:
             bg="#00FF00",
             fg="blue",
             font=("arial", 12, "bold"),
-            width=27,
+            width=23,
             height=2,
         )
         boutonModifier.grid(row=0, column=2)
+
+        # ===================================== #
+        optionsTrier = [
+            "Tier par",
+            "Alphabetique",
+            "Urgence",
+            "Externe",
+            "Date"
+        ]
+
+        clicked = StringVar()
+        clicked.set(optionsTrier[0])
+
+        boutonModifier = Button(
+            Buttonframe,
+            text="Modifier",
+            bg="#00FF00",
+            fg="blue",
+            font=("arial", 12, "bold"),
+            width=22,
+            height=2,
+        )
+        boutonModifier.grid(row=0, column=2)
+
+        boutonTrier = Frame(Buttonframe, bd=5)
+        boutonTrier.grid(row=0, column=3)
+
+        dropTrier = OptionMenu(boutonTrier, clicked, *optionsTrier)
+        dropTrier.config(height=1, width=23, fg="blue", font=("arial", 12, "bold"))
+        dropTrier.pack()
+
+        # ===================================== #
+        boutonSupprimer = Button(
+            Buttonframe,
+            text="Supprimer",
+            bg="#00FF00",
+            fg="blue",
+            font=("arial", 12, "bold"),
+            width=22,
+            height=2,
+        )
+        boutonSupprimer.grid(row=0, column=4)
+
+        # ===================================== #
+        boutonCalculerDevis = Button(
+            Buttonframe,
+            text="Devis",
+            bg="#00FF00",
+            fg="blue",
+            font=("arial", 12, "bold"),
+            width=13,
+            height=2,
+        )
+        boutonCalculerDevis.grid(row=0, column=5)
+
+        # ===================================== #
+        boutonQuitter = Button(
+            Buttonframe,
+            text="Quitter",
+            bg="#00FF00",
+            fg="blue",
+            font=("arial", 12, "bold"),
+            width=23,
+            height=2,
+        )
+        boutonQuitter.grid(row=0, column=6)
+
+        # ===================================== #
+        optionsStatistiques = [
+            "Afficher Stats",
+            "Stat 1",
+            "Stat 2",
+            "Stat 3",
+            "Stat 4"
+        ]
+
+        clicked = StringVar()
+        clicked.set(optionsStatistiques[0])
+
+        boutonAfficherStatistiques = Button(
+            Buttonframe,
+            text="Statistques",
+            bg="#00FF00",
+            fg="blue",
+            font=("arial", 12, "bold"),
+            width=22,
+            height=2,
+        )
+        boutonAfficherStatistiques.grid(row=0, column=5)
+
+        boutonTrier = Frame(Buttonframe, bd=5)
+        boutonTrier.grid(row=0, column=5)
+
+        dropStatistiques = OptionMenu(boutonTrier, clicked, *optionsStatistiques)
+        dropStatistiques.config(height=1, width=23, fg="blue", font=("arial", 12, "bold"))
+        dropStatistiques.pack()
 
 
 # ================== Déclaration de notre TKinter====================#
