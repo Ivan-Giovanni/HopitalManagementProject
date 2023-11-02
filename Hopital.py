@@ -10,7 +10,7 @@ class Hopital:
     def __init__(self, root):
         # ==================================== Définition de la fenêtre ======================================================= #
         self.root = root
-        self.root.title("Hopital Les Génies Management System")
+        self.root.title("Hopital Les Genies Management System")
         self.root.geometry("1540x800+0+0")
 
         # =========== Déclaration des variables ======================== #
@@ -30,7 +30,7 @@ class Hopital:
         self.nombreDeNuits = StringVar()
 
         # =========== Table de la fin de la fenêtre ================= #
-        self.hopitalTable = ttk.Treeview(
+        self.hospitalTable = ttk.Treeview(
             columns=(
                 "service",
                 "numeroDImmatriculation",
@@ -54,7 +54,7 @@ class Hopital:
             self.root,
             bd=20,
             relief=RIDGE,
-            text="HOPITAL LES GÉNIES MANAGEMENT SYSTEM",
+            text="HOPITAL LES GENIES MANAGEMENT SYSTEM",
             fg="red",
             bg="white",
             font=("times new roman", 50, "bold"),
@@ -219,7 +219,7 @@ class Hopital:
         # ===================================== #
         labelSpecialiteDuMedecin = Label(
             DataframeLeft,
-            text="Specialite",
+            text="Specialite du Med.",
             font=("arial", 15, "bold"),
             padx=2,
             pady=6,
@@ -427,6 +427,70 @@ class Hopital:
         dropStatistiques.config(height=1, width=23, fg="blue", font=("arial", 12, "bold"))
         dropStatistiques.pack()
 
+        # =============================================== Hopital Table ====================================================== #
+        # ================================================ ScrollBar ======================================================= #
+        scroll_x = ttk.Scrollbar(Detailsframe, orient=HORIZONTAL)
+        scroll_y = ttk.Scrollbar(Detailsframe, orient=VERTICAL)
+        self.hospitalTable = ttk.Treeview(
+            Detailsframe,
+            columns=(
+                "numeroDImmatriculation",
+                "nom",
+                "prenom",
+                "age",
+                "sexe",
+                "adresse",
+                "service",
+                "numeroDeChambre",
+                "specialiteDuMedecin",
+                "coordonnesDuMedecin",
+                "date",
+                "heure",
+                "nombreDeNuits",
+            ),
+            xscrollcommand=scroll_x.set,
+            yscrollcommand=scroll_y.set,
+        )
+        scroll_x.pack(side=BOTTOM, fill=X)
+        scroll_y.pack(side=RIGHT, fill=Y)
+
+        scroll_x = ttk.Scrollbar(command=self.hospitalTable.xview)
+        scroll_y = ttk.Scrollbar(command=self.hospitalTable.yview)
+
+        self.hospitalTable.heading("numeroDImmatriculation", text="N° D'imma.")
+        self.hospitalTable.heading("nom", text="Nom")
+        self.hospitalTable.heading("prenom", text="Prenom")
+        self.hospitalTable.heading("age", text="Age")
+        self.hospitalTable.heading("sexe", text="Sexe")
+        self.hospitalTable.heading("adresse", text="Adresse")
+        self.hospitalTable.heading("service", text="Service")
+        self.hospitalTable.heading("numeroDeChambre", text="N° Chambre")
+        self.hospitalTable.heading("specialiteDuMedecin", text="Spe du Med.")
+        self.hospitalTable.heading("coordonnesDuMedecin", text="Coor du Med.")
+        self.hospitalTable.heading("date", text="Date")
+        self.hospitalTable.heading("heure", text="Heure")
+        self.hospitalTable.heading("nombreDeNuits", text="Nbre nuits")
+
+        self.hospitalTable["show"] = "headings"
+
+        self.hospitalTable.pack(fill=BOTH, expand=1)
+
+        self.hospitalTable.column("numeroDImmatriculation", width=100)
+        self.hospitalTable.column("nom", width=100)
+        self.hospitalTable.column("prenom", width=100)
+        self.hospitalTable.column("age", width=100)
+        self.hospitalTable.column("sexe", width=100)
+        self.hospitalTable.column("adresse", width=100)
+        self.hospitalTable.column("service", width=100)
+        self.hospitalTable.column("numeroDeChambre", width=100)
+        self.hospitalTable.column("specialiteDuMedecin", width=100)
+        self.hospitalTable.column("coordonnesDuMedecin", width=100)
+        self.hospitalTable.column("date", width=100)
+        self.hospitalTable.column("heure", width=100)
+        self.hospitalTable.column("nombreDeNuits", width=100)
+
+        self.hospitalTable.pack(fill=BOTH, expand=1)
+        self.hospitalTable.bind("<ButtonRelease-1>", '''self.get_cursor''')
 
 # ================== Déclaration de notre TKinter====================#
 root = Tk()
