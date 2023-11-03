@@ -46,6 +46,7 @@ class Hopital:
                 "date",
                 "heure",
                 "nombreDeNuits",
+                "description"
             ),
         )
 
@@ -439,6 +440,7 @@ class Hopital:
                 "date",
                 "heure",
                 "nombreDeNuits",
+                "description"
             ),
             xscrollcommand=scroll_x.set,
             yscrollcommand=scroll_y.set,
@@ -462,6 +464,7 @@ class Hopital:
         self.hospitalTable.heading("date", text="Date")
         self.hospitalTable.heading("heure", text="Heure")
         self.hospitalTable.heading("nombreDeNuits", text="Nbre nuits")
+        self.hospitalTable.heading("description", text="Description")
 
         self.hospitalTable["show"] = "headings"
 
@@ -477,16 +480,17 @@ class Hopital:
         self.hospitalTable.column("numeroDeChambre", width=100)
         self.hospitalTable.column("specialiteDuMedecin", width=100)
         self.hospitalTable.column("coordonnesDuMedecin", width=100)
-        self.hospitalTable.column("date", width=100)
-        self.hospitalTable.column("heure", width=100)
-        self.hospitalTable.column("nombreDeNuits", width=100)
+        self.hospitalTable.column("date", width=90)
+        self.hospitalTable.column("heure", width=90)
+        self.hospitalTable.column("nombreDeNuits", width=90)
+        self.hospitalTable.column("description", width=100)
 
         self.hospitalTable.pack(fill=BOTH, expand=1)
         self.hospitalTable.bind("<ButtonRelease-1>", self.get_cursor)
 
     # ============================================ Declaration des fonctionnalites =========================================== #
     # =========================================================== #
-    def iEnregistrer(self):     #les fontions qui commencent par i sont liées aux boutons
+    def iEnregistrer(self):  # les fontions qui commencent par i sont liées aux boutons
         if self.numeroDImmatriculation == "" or self.service == "":
             messagebox.showerror("Error", "Veuillez remplir tous les champs")
         else:
@@ -499,7 +503,7 @@ class Hopital:
             myCursor = conn.cursor()
 
             myCursor.execute(
-                "insert into nf06Hopital values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                "insert into nf06Hopital values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
                 (
                     self.numeroDImmatriculation.get(),
                     self.nom.get(),
@@ -514,6 +518,7 @@ class Hopital:
                     self.date.get(),
                     self.heure.get(),
                     self.nombreDeNuits.get(),
+                    self.descriptionDeLaMaladie.get(),
                 ),
             )
 
@@ -566,13 +571,14 @@ class Hopital:
         for item in self.hospitalTable.get_children():
             self.hospitalTable.delete(item)
 
-
     # ============================================================= #
     def get_cursor(self, event=""):
         cursor_row = self.hospitalTable.focus()
         content = self.hospitalTable.item(cursor_row)
         row = content["values"]
+
         print(row)
+
         self.numeroDImmatriculation.set(row[0])
         self.nom.set(row[1])
         self.prenom.set(row[2])
@@ -586,7 +592,9 @@ class Hopital:
         self.date.set(row[10])
         self.heure.set(row[11])
         self.nombreDeNuits.set(row[12])
+        self.descriptionDeLaMaladie.set(row[13])
 
+        self.prescription()
 
     # ============================================================= #
     def iModifier(self):
@@ -599,7 +607,7 @@ class Hopital:
         )
         myCursor = conn.cursor()
         myCursor.execute(
-            "update nf06Hopital set nom=%s,prenom=%s,age=%s,sexe=%s,adresse=%s,service=%s,numeroDeLaChambre=%s,specialiteDuMedecin=%s,coordoneeDuMedecin=%s,date=%s,heure=%s,nombreDeNuits=%s where numeroDImmatriculation=%s",
+            "update nf06Hopital set nom=%s,prenom=%s,age=%s,sexe=%s,adresse=%s,service=%s,numeroDeLaChambre=%s,specialiteDuMedecin=%s,coordoneeDuMedecin=%s,date=%s,heure=%s,nombreDeNuits=%s,description=%s where numeroDImmatriculation=%s",
             (
                 self.nom.get(),
                 self.prenom.get(),
@@ -613,6 +621,7 @@ class Hopital:
                 self.date.get(),
                 self.heure.get(),
                 self.nombreDeNuits.get(),
+                self.descriptionDeLaMaladie.get(),
                 self.numeroDImmatriculation.get(),
             ),
         )
@@ -621,6 +630,55 @@ class Hopital:
         self.fetch_data()
         conn.close()
         messagebox.showinfo("Success", "Patient modifié avec success ✅")
+
+    # ==================================================================== #
+    def prescription(self):
+        self.textePrescription.delete("1.0", END)
+
+        self.textePrescription.insert(
+            END, "•N° Imma:\t\t" + self.numeroDImmatriculation.get() + "\n"
+        )
+        self.textePrescription.insert(
+            END, "•Nom:\t\t" + self.nom.get() + "\n"
+        )
+        self.textePrescription.insert(
+            END, "•Prenom:\t\t" + self.prenom.get() + "\n"
+        )
+        self.textePrescription.insert(
+            END, "•Age:\t\t" + self.age.get() + "\n"
+        )
+        self.textePrescription.insert(
+            END, "•Sexe:\t\t" + self.sexe.get() + "\n"
+        )
+        self.textePrescription.insert(
+            END, "•Adresse:\t\t" + self.adresse.get() + "\n"
+        )
+        self.textePrescription.insert(
+            END, "•Service:\t\t" + self.service.get() + "\n"
+        )
+        self.textePrescription.insert(
+            END, "•N° Chambre:\t\t" + self.numeroDeLaChambre.get() + "\n"
+        )
+        self.textePrescription.insert(
+            END, "•Spe Med:\t\t" + self.specialiteDuMedecin.get() + "\n"
+        )
+        self.textePrescription.insert(
+            END, "•Coor Med:\t\t" + self.coordoneeDuMedecin.get() + "\n"
+        )
+        self.textePrescription.insert(
+            END, "•Date:\t\t" + self.date.get() + "\n"
+        )
+        self.textePrescription.insert(
+            END, "•Heure:\t\t" + self.heure.get() + "\n"
+        )
+        self.textePrescription.insert(
+            END, "•Nbre nuits:\t\t" + self.nombreDeNuits.get() + "\n"
+        )
+        self.textePrescription.insert(
+            END, "•Description:\t\t" + self.descriptionDeLaMaladie.get() + "\n"
+        )
+
+        self.textePrescription.insert(END, "\n")
 
 
 # ================== Déclaration de notre TKinter====================#
