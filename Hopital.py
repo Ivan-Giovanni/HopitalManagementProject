@@ -323,6 +323,7 @@ class Hopital:
         # ===================================== #
         boutonModifier = Button(
             Buttonframe,
+            command=self.iModifier,
             text="Modifier",
             bg="#00FF00",
             fg="blue",
@@ -343,17 +344,6 @@ class Hopital:
 
         clicked = StringVar()
         clicked.set(optionsTrier[0])
-
-        boutonModifier = Button(
-            Buttonframe,
-            text="Modifier",
-            bg="#00FF00",
-            fg="blue",
-            font=("arial", 12, "bold"),
-            width=22,
-            height=2,
-        )
-        boutonModifier.grid(row=0, column=2)
 
         boutonTrier = Frame(Buttonframe, bd=5)
         boutonTrier.grid(row=0, column=3)
@@ -569,7 +559,7 @@ class Hopital:
         conn.commit()
         self.fetch_data()
         conn.close()
-        messagebox.showinfo("Delete", "Patient Supprimé avec succes ✅")
+        messagebox.showinfo("Delete", "Patient Supprimé avec success ✅")
 
     # ============================================================= #
     def delete_all_rows(self):
@@ -596,6 +586,41 @@ class Hopital:
         self.date.set(row[10])
         self.heure.set(row[11])
         self.nombreDeNuits.set(row[12])
+
+
+    # ============================================================= #
+    def iModifier(self):
+        print("\nUPDATING PATIENT...\n")
+        conn = mysql.connector.connect(
+            host="localhost",
+            username="root",
+            password="GiovannI2004@",
+            database="nf06Hopital",
+        )
+        myCursor = conn.cursor()
+        myCursor.execute(
+            "update nf06Hopital set nom=%s,prenom=%s,age=%s,sexe=%s,adresse=%s,service=%s,numeroDeLaChambre=%s,specialiteDuMedecin=%s,coordoneeDuMedecin=%s,date=%s,heure=%s,nombreDeNuits=%s where numeroDImmatriculation=%s",
+            (
+                self.nom.get(),
+                self.prenom.get(),
+                self.age.get(),
+                self.sexe.get(),
+                self.adresse.get(),
+                self.service.get(),
+                self.numeroDeLaChambre.get(),
+                self.specialiteDuMedecin.get(),
+                self.coordoneeDuMedecin.get(),
+                self.date.get(),
+                self.heure.get(),
+                self.nombreDeNuits.get(),
+                self.numeroDImmatriculation.get(),
+            ),
+        )
+
+        conn.commit()
+        self.fetch_data()
+        conn.close()
+        messagebox.showinfo("Success", "Patient modifié avec success ✅")
 
 
 # ================== Déclaration de notre TKinter====================#
