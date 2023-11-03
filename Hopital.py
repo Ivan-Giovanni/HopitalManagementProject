@@ -297,6 +297,19 @@ class Hopital:
 
         # ======================================= Boutons =========================================================== #
         # ===================================== #
+        boutonToutAfficher = Button(
+            Buttonframe,
+            command=self.ifetch_data,
+            text="ToutAfficher",
+            bg="#00FF00",
+            fg="blue",
+            font=("arial", 12, "bold"),
+            width=18,
+            height=2,
+        )
+        boutonToutAfficher.grid(row=0, column=0)
+
+        # ===================================== #
         boutonEnregistrer = Button(
             Buttonframe,
             command=self.iEnregistrer,
@@ -304,10 +317,10 @@ class Hopital:
             bg="#00FF00",
             fg="blue",
             font=("arial", 12, "bold"),
-            width=23,
+            width=16,
             height=2,
         )
-        boutonEnregistrer.grid(row=0, column=0)
+        boutonEnregistrer.grid(row=0, column=1)
 
         # ===================================== #
         boutonRechercher = Button(
@@ -316,10 +329,10 @@ class Hopital:
             bg="#00FF00",
             fg="blue",
             font=("arial", 12, "bold"),
-            width=22,
+            width=16,
             height=2,
         )
-        boutonRechercher.grid(row=0, column=1)
+        boutonRechercher.grid(row=0, column=2)
 
         # ===================================== #
         boutonModifier = Button(
@@ -329,10 +342,10 @@ class Hopital:
             bg="#00FF00",
             fg="blue",
             font=("arial", 12, "bold"),
-            width=23,
+            width=16,
             height=2,
         )
-        boutonModifier.grid(row=0, column=2)
+        boutonModifier.grid(row=0, column=3)
 
         # ===================================== #
         optionsTrier = [
@@ -347,10 +360,10 @@ class Hopital:
         clicked.set(optionsTrier[0])
 
         boutonTrier = Frame(Buttonframe, bd=5)
-        boutonTrier.grid(row=0, column=3)
+        boutonTrier.grid(row=0, column=4)
 
         dropTrier = OptionMenu(boutonTrier, clicked, *optionsTrier)
-        dropTrier.config(height=1, width=23, fg="blue", font=("arial", 12, "bold"))
+        dropTrier.config(height=1, width=16, fg="blue", font=("arial", 12, "bold"))
         dropTrier.pack()
 
         # ===================================== #
@@ -361,35 +374,10 @@ class Hopital:
             bg="#00FF00",
             fg="blue",
             font=("arial", 12, "bold"),
-            width=22,
+            width=16,
             height=2,
         )
-        boutonSupprimer.grid(row=0, column=4)
-
-        # ===================================== #
-        boutonCalculerDevis = Button(
-            Buttonframe,
-            text="Devis",
-            bg="#00FF00",
-            fg="blue",
-            font=("arial", 12, "bold"),
-            width=13,
-            height=2,
-        )
-        boutonCalculerDevis.grid(row=0, column=5)
-
-        # ===================================== #
-        boutonQuitter = Button(
-            Buttonframe,
-            command=self.iQuitter,
-            text="Quitter",
-            bg="#00FF00",
-            fg="blue",
-            font=("arial", 12, "bold"),
-            width=23,
-            height=2,
-        )
-        boutonQuitter.grid(row=0, column=6)
+        boutonSupprimer.grid(row=0, column=5)
 
         # ===================================== #
         optionsStatistiques = [
@@ -403,23 +391,37 @@ class Hopital:
         clicked = StringVar()
         clicked.set(optionsStatistiques[0])
 
-        boutonAfficherStatistiques = Button(
+        boutonStatistiques = Frame(Buttonframe, bd=5)
+        boutonStatistiques.grid(row=0, column=6)
+
+        dropStatistiques = OptionMenu(boutonStatistiques, clicked, *optionsStatistiques)
+        dropStatistiques.config(height=1, width=16, fg="blue", font=("arial", 12, "bold"))
+        dropStatistiques.pack()
+
+        # ===================================== #
+        boutonCalculerDevis = Button(
             Buttonframe,
-            text="Statistques",
+            text="Devis",
             bg="#00FF00",
             fg="blue",
             font=("arial", 12, "bold"),
-            width=22,
+            width=16,
             height=2,
         )
-        boutonAfficherStatistiques.grid(row=0, column=5)
+        boutonCalculerDevis.grid(row=0, column=7)
 
-        boutonTrier = Frame(Buttonframe, bd=5)
-        boutonTrier.grid(row=0, column=5)
-
-        dropStatistiques = OptionMenu(boutonTrier, clicked, *optionsStatistiques)
-        dropStatistiques.config(height=1, width=23, fg="blue", font=("arial", 12, "bold"))
-        dropStatistiques.pack()
+        # ===================================== #
+        boutonQuitter = Button(
+            Buttonframe,
+            command=self.iQuitter,
+            text="Quitter",
+            bg="#00FF00",
+            fg="blue",
+            font=("arial", 12, "bold"),
+            width=18,
+            height=2,
+        )
+        boutonQuitter.grid(row=0, column=8)
 
         # =============================================== Hospital Table ==================================================== #
         # ================================================ ScrollBar ======================================================= #
@@ -524,13 +526,12 @@ class Hopital:
             )
 
             conn.commit()
-            self.fetch_data()
             conn.close()
             messagebox.showinfo("Success", "Patient enregistré avec succès ✅")
             print("\nSUCCESSFUL COMMITMENT")
 
     # =========================================================== #
-    def fetch_data(self):
+    def ifetch_data(self):
         conn = mysql.connector.connect(
             host="localhost",
             username="root",
@@ -563,7 +564,7 @@ class Hopital:
         myCursor.execute(query, value)
 
         conn.commit()
-        self.fetch_data()
+        self.ifetch_data()
         conn.close()
         messagebox.showinfo("Delete", "Patient Supprimé avec success ✅")
 
@@ -628,7 +629,7 @@ class Hopital:
         )
 
         conn.commit()
-        self.fetch_data()
+        self.ifetch_data()
         conn.close()
         messagebox.showinfo("Success", "Patient modifié avec success ✅")
 
