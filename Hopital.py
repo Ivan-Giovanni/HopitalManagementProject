@@ -365,6 +365,7 @@ class Hopital:
         # ===================================== #
         boutonSupprimer = Button(
             Buttonframe,
+            command=self.iSupprimer,
             text="Supprimer",
             bg="#00FF00",
             fg="blue",
@@ -491,19 +492,19 @@ class Hopital:
         self.hospitalTable.column("nombreDeNuits", width=100)
 
         self.hospitalTable.pack(fill=BOTH, expand=1)
-        self.hospitalTable.bind("<ButtonRelease-1>", '''self.get_cursor''')
+        self.hospitalTable.bind("<ButtonRelease-1>", self.get_cursor)
 
-        # ======================================== Declaration des fonctionnalites =========================================== #
-        # ============================================ #
-    def iEnregistrer(self):
+    # ============================================ Declaration des fonctionnalites =========================================== #
+    # =========================================================== #
+    def iEnregistrer(self):     #les fontions qui commencent par i sont liées aux boutons
         if self.numeroDImmatriculation == "" or self.service == "":
             messagebox.showerror("Error", "Veuillez remplir tous les champs")
         else:
             conn = mysql.connector.connect(
                 host="localhost",
                 username="root",
-                password="GiovannI2004@",  #Utilise ton propre mot de passe
-                database="nf06Hopital",    #Nomme exactement comme dans mySQL Workbench
+                password="GiovannI2004@",  # Utilise ton propre mot de passe
+                database="nf06Hopital",  # Nomme exactement comme dans mySQL Workbench
             )
             myCursor = conn.cursor()
 
@@ -527,10 +528,75 @@ class Hopital:
             )
 
             conn.commit()
-            '''self.fetch_data()'''
+            self.fetch_data()
             conn.close()
             messagebox.showinfo("Success", "Patient enregistré avec succès ✅")
             print("\nSUCCESSFUL COMMITMENT")
+
+    # =========================================================== #
+    def fetch_data(self):
+        conn = mysql.connector.connect(
+            host="localhost",
+            username="root",
+            password="GiovannI2004@",
+            database="nf06Hopital",
+        )
+        myCursor = conn.cursor()
+        myCursor.execute("select * from nf06Hopital")
+
+        self.delete_all_rows()
+
+        rows = myCursor.fetchall()
+        if len(rows) != 0:
+            for i in rows:
+                self.hospitalTable.insert("", END, values=i)
+            conn.commit()
+        conn.close()
+
+    # ============================================================ #
+    def iSupprimer(self):
+        conn = mysql.connector.connect(
+            host="localhost",
+            username="root",
+            password="GiovannI2004@",
+            database="nf06Hopital",
+        )
+        myCursor = conn.cursor()
+        query = "delete from nf06Hopital where numeroDImmatriculation=%s"
+        value = (self.numeroDImmatriculation.get(),)
+        myCursor.execute(query, value)
+
+        conn.commit()
+        self.fetch_data()
+        conn.close()
+        messagebox.showinfo("Delete", "Patient Supprimé avec succes ✅")
+
+    # ============================================================= #
+    def delete_all_rows(self):
+        for item in self.hospitalTable.get_children():
+            self.hospitalTable.delete(item)
+
+
+    # ============================================================= #
+    def get_cursor(self, event=""):
+        cursor_row = self.hospitalTable.focus()
+        content = self.hospitalTable.item(cursor_row)
+        row = content["values"]
+        print(row)
+        self.numeroDImmatriculation.set(row[0])
+        self.nom.set(row[1])
+        self.prenom.set(row[2])
+        self.age.set(row[3])
+        self.sexe.set(row[4])
+        self.adresse.set(row[5])
+        self.service.set(row[6])
+        self.numeroDeLaChambre.set(row[7])
+        self.specialiteDuMedecin.set(row[8])
+        self.coordoneeDuMedecin.set(row[9])
+        self.date.set(row[10])
+        self.heure.set(row[11])
+        self.nombreDeNuits.set(row[12])
+
 
 # ================== Déclaration de notre TKinter====================#
 root = Tk()
