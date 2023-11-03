@@ -4,11 +4,11 @@ from tkinter import messagebox
 import mysql.connector
 
 
-# ============================================== Définition de la classe Hopital =============================================== #
+# ============================================== Définition de la classe Hopital ============================================= #
 
 class Hopital:
     def __init__(self, root):
-        # ==================================== Définition de la fenêtre ======================================================= #
+        # ==================================== Définition de la fenêtre ====================================================== #
         self.root = root
         self.root.title("Hopital Les Genies Management System")
         self.root.geometry("1540x800+0+0")
@@ -212,7 +212,7 @@ class Hopital:
         )
         labelNumeroDeLaChambre.grid(row=1, column=2, sticky=W)
         texteNumeroDeLaChambre = Entry(
-            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.age, width=35
+            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.numeroDeLaChambre, width=35
         )
         texteNumeroDeLaChambre.grid(row=1, column=3)
 
@@ -298,6 +298,7 @@ class Hopital:
         # ===================================== #
         boutonEnregistrer = Button(
             Buttonframe,
+            command=self.iEnregistrer,
             text="Enregistrer",
             bg="#00FF00",
             fg="blue",
@@ -427,7 +428,7 @@ class Hopital:
         dropStatistiques.config(height=1, width=23, fg="blue", font=("arial", 12, "bold"))
         dropStatistiques.pack()
 
-        # =============================================== Hopital Table ====================================================== #
+        # =============================================== Hospital Table ==================================================== #
         # ================================================ ScrollBar ======================================================= #
         scroll_x = ttk.Scrollbar(Detailsframe, orient=HORIZONTAL)
         scroll_y = ttk.Scrollbar(Detailsframe, orient=VERTICAL)
@@ -491,6 +492,45 @@ class Hopital:
 
         self.hospitalTable.pack(fill=BOTH, expand=1)
         self.hospitalTable.bind("<ButtonRelease-1>", '''self.get_cursor''')
+
+        # ======================================== Declaration des fonctionnalites =========================================== #
+        # ============================================ #
+    def iEnregistrer(self):
+        if self.numeroDImmatriculation == "" or self.service == "":
+            messagebox.showerror("Error", "Veuillez remplir tous les champs")
+        else:
+            conn = mysql.connector.connect(
+                host="localhost",
+                username="root",
+                password="GiovannI2004@",  #Utilise ton propre mot de passe
+                database="nf06Hopital",    #Nomme exactement comme dans mySQL Workbench
+            )
+            myCursor = conn.cursor()
+
+            myCursor.execute(
+                "insert into nf06Hopital values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                (
+                    self.numeroDImmatriculation.get(),
+                    self.nom.get(),
+                    self.prenom.get(),
+                    self.age.get(),
+                    self.sexe.get(),
+                    self.adresse.get(),
+                    self.service.get(),
+                    self.numeroDeLaChambre.get(),
+                    self.specialiteDuMedecin.get(),
+                    self.coordoneeDuMedecin.get(),
+                    self.date.get(),
+                    self.heure.get(),
+                    self.nombreDeNuits.get(),
+                ),
+            )
+
+            conn.commit()
+            '''self.fetch_data()'''
+            conn.close()
+            messagebox.showinfo("Success", "Patient enregistré avec succès ✅")
+            print("\nSUCCESSFUL COMMITMENT")
 
 # ================== Déclaration de notre TKinter====================#
 root = Tk()
