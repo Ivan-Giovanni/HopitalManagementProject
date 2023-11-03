@@ -381,6 +381,7 @@ class Hopital:
         # ===================================== #
         boutonQuitter = Button(
             Buttonframe,
+            command=self.iQuitter,
             text="Quitter",
             bg="#00FF00",
             fg="blue",
@@ -679,6 +680,15 @@ class Hopital:
         )
 
         self.textePrescription.insert(END, "\n")
+
+    # ==================================================================== #
+    def iQuitter(self):
+        iExit = messagebox.askyesno(
+            "Hopital Les Genies Management System", "Voulez-vous quitter l'application?"
+        )
+        if iExit > 0:
+            root.destroy()
+            return
 
 
 # ================== Déclaration de notre TKinter====================#
