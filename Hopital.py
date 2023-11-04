@@ -29,6 +29,8 @@ class Hopital:
         self.heure = StringVar()
         self.nombreDeNuits = StringVar()
 
+        self.recherche = StringVar()
+
         # =========== Table de la fin de la fenêtre ================= #
         self.hospitalTable = ttk.Treeview(
             columns=(
@@ -295,6 +297,12 @@ class Hopital:
         )
         self.textePrescription.grid(row=0, column=0)
 
+        # ======================================= Search Bar ========================================================== #
+        labelSearchBar = Label(SearchBarframe, font=("arial", 16, "bold"), text="SearchBar", padx=2)
+        labelSearchBar.grid(row=0, column=0, sticky=W)
+        searchBarEntry = Entry(SearchBarframe, font=("arial", 17, "bold"), textvariable=self.recherche, width=130)
+        searchBarEntry.grid(row=0, column=1)
+
         # ======================================= Boutons =========================================================== #
         # ===================================== #
         boutonToutAfficher = Button(
@@ -323,16 +331,22 @@ class Hopital:
         boutonEnregistrer.grid(row=0, column=1)
 
         # ===================================== #
-        boutonRechercher = Button(
-            Buttonframe,
-            text="Rechercher",
-            bg="#00FF00",
-            fg="blue",
-            font=("arial", 12, "bold"),
-            width=16,
-            height=2,
-        )
+        optionsRechercher = [
+            "Rechercher par",
+            "Nom",
+            "Penom",
+            "N° Imma."
+        ]
+
+        clickedRecherche = StringVar()
+        clickedRecherche.set(optionsRechercher[0])
+
+        boutonRechercher = Frame(Buttonframe, bd=5)
         boutonRechercher.grid(row=0, column=2)
+
+        dropRechercher = OptionMenu(boutonRechercher, clickedRecherche, *optionsRechercher, command=self.iRechercher)
+        dropRechercher.config(height=1, width=16, fg="blue", font=("arial", 12, "bold"))
+        dropRechercher.pack()
 
         # ===================================== #
         boutonModifier = Button(
@@ -356,13 +370,13 @@ class Hopital:
             "Date"
         ]
 
-        clicked = StringVar()
-        clicked.set(optionsTrier[0])
+        clickedTrier = StringVar()
+        clickedTrier.set(optionsTrier[0])
 
         boutonTrier = Frame(Buttonframe, bd=5)
         boutonTrier.grid(row=0, column=4)
 
-        dropTrier = OptionMenu(boutonTrier, clicked, *optionsTrier)
+        dropTrier = OptionMenu(boutonTrier, clickedTrier, *optionsTrier)
         dropTrier.config(height=1, width=16, fg="blue", font=("arial", 12, "bold"))
         dropTrier.pack()
 
@@ -388,13 +402,13 @@ class Hopital:
             "Stat 4"
         ]
 
-        clicked = StringVar()
-        clicked.set(optionsStatistiques[0])
+        clickedStatistiques = StringVar()
+        clickedStatistiques.set(optionsStatistiques[0])
 
         boutonStatistiques = Frame(Buttonframe, bd=5)
         boutonStatistiques.grid(row=0, column=6)
 
-        dropStatistiques = OptionMenu(boutonStatistiques, clicked, *optionsStatistiques)
+        dropStatistiques = OptionMenu(boutonStatistiques, clickedStatistiques, *optionsStatistiques)
         dropStatistiques.config(height=1, width=16, fg="blue", font=("arial", 12, "bold"))
         dropStatistiques.pack()
 
@@ -691,6 +705,33 @@ class Hopital:
             root.destroy()
             return
 
+    # ==================================================================== #
+    def iRechercher(self, option):
+        self.delete_all_rows()
+
+        conn = mysql.connector.connect(
+            host="localhost",
+            username="root",
+            password="GiovannI2004@",
+            database="nf06Hopital",
+        )
+        myCursor = conn.cursor()
+
+        if option == "Nom":
+            myCursor.execute("select * from nf06Hopital where nom = %s", (self.recherche.get(),))
+        elif option == "Penom":
+            myCursor.execute("select * from nf06Hopital where prenom = %s", (self.recherche.get(),))
+        elif option == "N° Imma.":
+            myCursor.execute("select * from nf06Hopital where numeroDImmatriculation = %s", (self.recherche.get(),))
+
+        rows = myCursor.fetchall()
+        if len(rows) != 0:
+            for i in rows:
+                self.hospitalTable.insert("", END, values=i)
+            conn.commit()
+        else:
+            messagebox.showerror("Error", "Aucun patient correspondant")
+        conn.close()
 
 # ================== Déclaration de notre TKinter====================#
 root = Tk()
