@@ -42,6 +42,8 @@ class Hopital:
         self.irm = IntVar()
         self.chambreIndividuelle = IntVar()
 
+        self.devis = StringVar()
+
         # =========== Table de la fin de la fenêtre ================= #
         self.hospitalTable = ttk.Treeview(
             columns=(
@@ -99,7 +101,7 @@ class Hopital:
             font=("times new roman", 17, "bold"),
             text="Examens et Tarifs",
         )
-        DataframeRightUp.place(x=990, y=5, width=400, height=233)
+        DataframeRightUp.place(x=990, y=5, width=400, height=231)
 
         DataframeRightDown = LabelFrame(
             Dataframe,
@@ -109,7 +111,7 @@ class Hopital:
             font=("times new roman", 17, "bold"),
             text="Devis",
         )
-        DataframeRightDown.place(x=990, y=242, width=400, height=62)
+        DataframeRightDown.place(x=990, y=240, width=400, height=64)
 
         # =======================================SearchBar frame============================================================== #
         SearchBarframe = Frame(self.root, bd=20, relief=RIDGE)
@@ -401,9 +403,19 @@ class Hopital:
         )
         labelChambreIndividuelle.grid(row=7, column=1, sticky=W)
 
+        # ======================================= DataframeRightDown =============================================== #
+        # ======================================= #
+        labelTotal = Label(
+            DataframeRightDown, font=("arial", 18, "bold"), text="TOTAL(€): ", padx=1
+        )
+        labelTotal.grid(row=0, column=0)
+        texteTotal = Entry(
+            DataframeRightDown, font=("arial", 18, "bold"), textvariable=self.devis, width=23, state="readonly")
+        texteTotal.grid(row=0, column=1)
+
         # ======================================= Search Bar ========================================================== #
         labelSearchBar = Label(SearchBarframe, font=("arial", 16, "bold"), text="SearchBar", padx=2)
-        labelSearchBar.grid(row=0, column=0, sticky=E)
+        labelSearchBar.grid(row=0, column=0, sticky=W)
         searchBarEntry = Entry(SearchBarframe, font=("arial", 17, "bold"), textvariable=self.recherche, width=130)
         searchBarEntry.grid(row=0, column=1)
 
@@ -520,6 +532,7 @@ class Hopital:
         boutonCalculerDevis = Button(
             Buttonframe,
             text="Devis",
+            command=self.iDevis,
             bg="#00FF00",
             fg="blue",
             font=("arial", 12, "bold"),
@@ -630,7 +643,7 @@ class Hopital:
             myCursor = conn.cursor()
 
             myCursor.execute(
-                "insert into nf06HopitalV3 values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                "insert into nf06HopitalV3 values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
                 (
                     self.numeroDImmatriculation.get(),
                     self.nom.get(),
@@ -656,6 +669,7 @@ class Hopital:
                     self.coloscopie.get(),
                     self.irm.get(),
                     self.chambreIndividuelle.get(),
+                    self.devis.get(),
                 ),
             )
 
@@ -683,7 +697,6 @@ class Hopital:
                 self.hospitalTable.insert("", END, values=i)
             conn.commit()
         conn.close()
-
 
     # ============================================================ #
     def iSupprimer(self):
@@ -719,7 +732,7 @@ class Hopital:
         self.numeroDImmatriculation.set(row[0])
         self.nom.set(row[1])
         self.prenom.set(row[2])
-        self.age.set(row[3])
+        self.age.set(int(row[3]))
         self.sexe.set(row[4])
         self.adresse.set(row[5])
         self.service.set(row[6])
@@ -740,6 +753,7 @@ class Hopital:
         self.coloscopie.set(int(row[21]))
         self.irm.set(int(row[22]))
         self.chambreIndividuelle.set(int(row[23]))
+        self.devis.set(row[24])
 
     # ============================================================= #
     def iModifier(self):
@@ -755,7 +769,7 @@ class Hopital:
             "update nf06HopitalV3 set nom=%s,prenom=%s,age=%s,sexe=%s,adresse=%s,service=%s,numeroDeLaChambre=%s,"
             "specialiteDuMedecin=%s,coordoneeDuMedecin=%s,jour=%s,mois=%s,annee=%s,heure=%s,"
             "nombreDeNuits=%s,description=%s,accouchement=%s,bilanSante=%s,operationDuCanalCarpien=%s,"
-            "orl=%s,echographie=%s,coloscopie=%s,irm=%s,chambreIndividuelle=%s where numeroDImmatriculation=%s",
+            "orl=%s,echographie=%s,coloscopie=%s,irm=%s,chambreIndividuelle=%s,devis=%s where numeroDImmatriculation=%s",
             (
                 self.nom.get(),
                 self.prenom.get(),
@@ -780,6 +794,7 @@ class Hopital:
                 self.coloscopie.get(),
                 self.irm.get(),
                 self.chambreIndividuelle.get(),
+                self.devis.get(),
                 self.numeroDImmatriculation.get(),
             ),
         )
@@ -881,6 +896,18 @@ class Hopital:
             print(sortedRows)
             print("\n")
 
+    # ==================================================================== #
+    def iDevis(self):
+        self.devis.set(
+            str((2600 * self.accouchement.get()) + (50 * self.bilanSante.get()) + \
+            (1250 * self.operationDuCanalCarpien.get()) + (35 * self.orl.get()) + \
+            (85 * self.echographie.get()) + (190 * self.coloscopie.get()) + \
+            (400 * self.irm.get()) + (68 * self.chambreIndividuelle.get() * self.nombreDeNuits.get()))
+        )
+
+        self.iModifier()
+
+        print("Devis = ", self.devis.get(), "\n")
 
 
 # ================== Déclaration de notre TKinter====================#
