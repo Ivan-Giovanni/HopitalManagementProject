@@ -25,11 +25,22 @@ class Hopital:
         self.numeroDeLaChambre = StringVar()
         self.specialiteDuMedecin = StringVar()
         self.coordoneeDuMedecin = StringVar()
-        self.date = StringVar()
+        self.jour = StringVar()
+        self.mois = StringVar()
+        self.annee = StringVar()
         self.heure = StringVar()
         self.nombreDeNuits = StringVar()
 
         self.recherche = StringVar()
+
+        self.accouchement = IntVar()
+        self.bilanSante = IntVar()
+        self.operationDuCanalCarpien = IntVar()
+        self.orl = IntVar()
+        self.echographie = IntVar()
+        self.coloscopie = IntVar()
+        self.irm = IntVar()
+        self.nuitALhopital = IntVar()
 
         # =========== Table de la fin de la fenêtre ================= #
         self.hospitalTable = ttk.Treeview(
@@ -45,7 +56,9 @@ class Hopital:
                 "numeroDeLaChambre",
                 "specialiteDuMedecin",
                 "coordoneeDuMedecin",
-                "date",
+                "jour",
+                "mois",
+                "annee",
                 "heure",
                 "nombreDeNuits",
                 "description"
@@ -78,15 +91,25 @@ class Hopital:
         )
         DataframeLeft.place(x=0, y=5, width=980, height=300)
 
-        DataframeRight = LabelFrame(
+        DataframeRightUp = LabelFrame(
             Dataframe,
             bd=10,
             relief=RIDGE,
             padx=10,
             font=("times new roman", 17, "bold"),
-            text="Prescription",
+            text="Examens et Tarifs",
         )
-        DataframeRight.place(x=990, y=5, width=400, height=300)
+        DataframeRightUp.place(x=990, y=5, width=400, height=233)
+
+        DataframeRightDown = LabelFrame(
+            Dataframe,
+            bd=10,
+            relief=RIDGE,
+            padx=10,
+            font=("times new roman", 17, "bold"),
+            text="Devis",
+        )
+        DataframeRightDown.place(x=990, y=242, width=400, height=62)
 
         # =======================================SearchBar frame============================================================== #
         SearchBarframe = Frame(self.root, bd=20, relief=RIDGE)
@@ -257,14 +280,34 @@ class Hopital:
         texteCoordonneDuMedecin.grid(row=3, column=3)
 
         # ===================================== #
-        labelDate = Label(
-            DataframeLeft, font=("arial", 15, "bold"), text="Date", padx=2
+        labelJour = Label(
+            DataframeLeft, font=("arial", 15, "bold"), text="Jour", padx=2
         )
-        labelDate.grid(row=4, column=2, sticky=W)
-        texteDate = Entry(
-            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.date, width=35
+        labelJour.grid(row=4, column=2, sticky=W)
+        texteJour = Entry(
+            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.jour, width=35
         )
-        texteDate.grid(row=4, column=3)
+        texteJour.grid(row=4, column=3)
+
+        # ===================================== #
+        labelMois = Label(
+            DataframeLeft, font=("arial", 15, "bold"), text="Mois", padx=2
+        )
+        labelMois.grid(row=7, column=0, sticky=W)
+        texteMois = Entry(
+            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.mois, width=35
+        )
+        texteMois.grid(row=7, column=1)
+
+        # ===================================== #
+        labelAnnee = Label(
+            DataframeLeft, font=("arial", 15, "bold"), text="Annee", padx=2
+        )
+        labelAnnee.grid(row=7, column=2, sticky=W)
+        texteAnnee = Entry(
+            DataframeLeft, font=("arial", 14, "bold"), textvariable=self.annee, width=35
+        )
+        texteAnnee.grid(row=7, column=3)
 
         # ===================================== #
         labelHeure = Label(
@@ -287,19 +330,80 @@ class Hopital:
         texteNombreDeNuits.grid(row=6, column=3)
 
         # ======================================= DataframeRight ================================================= #
-        self.textePrescription = Text(
-            DataframeRight,
-            font=("arial", 14, "bold"),
-            width=44,
-            height=15,
-            padx=2,
-            pady=6,
+        # ======================================= DataframeRightUp =============================================== #
+        # ======================================= #
+        Checkbutton(DataframeRightUp, text="Accouchement", font=("arial", 15, "bold"),
+                    variable=self.accouchement).grid(
+            row=0, column=0, sticky=W)
+        labelAccouchement = Label(
+            DataframeRightUp, font=("arial", 15, "bold"), text="2600€", padx=40
         )
-        self.textePrescription.grid(row=0, column=0)
+        labelAccouchement.grid(row=0, column=1, sticky=W)
+
+        # ======================================= #
+        Checkbutton(DataframeRightUp, text="Bilan de Sante", font=("arial", 15, "bold"),
+                    variable=self.bilanSante).grid(
+            row=1, column=0, sticky=W)
+        labelBilanSante = Label(
+            DataframeRightUp, font=("arial", 15, "bold"), text="50€", padx=40
+        )
+        labelBilanSante.grid(row=1, column=1, sticky=W)
+
+        # ======================================= #
+        Checkbutton(DataframeRightUp, text="Operation du canal carpien", font=("arial", 15, "bold"),
+                    variable=self.operationDuCanalCarpien).grid(
+            row=2, column=0, sticky=W)
+        labelOperationDuCanalCarpien = Label(
+            DataframeRightUp, font=("arial", 15, "bold"), text="1250€", padx=40
+        )
+        labelOperationDuCanalCarpien.grid(row=2, column=1, sticky=W)
+
+        # ======================================= #
+        Checkbutton(DataframeRightUp, text="ORL", font=("arial", 15, "bold"), variable=self.orl).grid(
+            row=3, column=0, sticky=W)
+        labelOrl = Label(
+            DataframeRightUp, font=("arial", 15, "bold"), text="35€", padx=40
+        )
+        labelOrl.grid(row=3, column=1, sticky=W)
+
+        # ======================================= #
+        Checkbutton(DataframeRightUp, text="Echographie ", font=("arial", 15, "bold"),
+                    variable=self.echographie).grid(
+            row=4, column=0, sticky=W)
+        labelEchographie = Label(
+            DataframeRightUp, font=("arial", 15, "bold"), text="85€", padx=40
+        )
+        labelEchographie.grid(row=4, column=1, sticky=W)
+
+        # ======================================= #
+        Checkbutton(DataframeRightUp, text="Coloscopie", font=("arial", 15, "bold"),
+                    variable=self.coloscopie).grid(
+            row=5, column=0, sticky=W)
+        labelColoscopie = Label(
+            DataframeRightUp, font=("arial", 15, "bold"), text="190€", padx=40
+        )
+        labelColoscopie.grid(row=5, column=1, sticky=W)
+
+        # ======================================= #
+        Checkbutton(DataframeRightUp, text="IRM ", font=("arial", 15, "bold"), variable=self.irm).grid(
+            row=6, column=0, sticky=W)
+        labelIrm = Label(
+            DataframeRightUp, font=("arial", 15, "bold"), text="400€", padx=40
+        )
+        labelIrm.grid(row=6, column=1, sticky=W)
+
+        # ======================================= #
+        Checkbutton(DataframeRightUp, text="Chambre individuelle", font=("arial", 15, "bold"),
+                    variable=self.accouchement).grid(
+            row=7, column=0, sticky=W)
+        labelChambreIndividuelle = Label(
+            DataframeRightUp, font=("arial", 15, "bold"), text="68€/jour", padx=40
+        )
+        labelChambreIndividuelle.grid(row=7, column=1, sticky=W)
 
         # ======================================= Search Bar ========================================================== #
         labelSearchBar = Label(SearchBarframe, font=("arial", 16, "bold"), text="SearchBar", padx=2)
-        labelSearchBar.grid(row=0, column=0, sticky=W)
+        labelSearchBar.grid(row=0, column=0, sticky=E)
         searchBarEntry = Entry(SearchBarframe, font=("arial", 17, "bold"), textvariable=self.recherche, width=130)
         searchBarEntry.grid(row=0, column=1)
 
@@ -363,11 +467,12 @@ class Hopital:
 
         # ===================================== #
         optionsTrier = [
-            "Tier par",
+            "Trier par",
             "Alphabetique",
             "Urgence",
             "Externe",
-            "Date"
+            "mois",
+            "annee"
         ]
 
         clickedTrier = StringVar()
@@ -432,7 +537,7 @@ class Hopital:
             bg="#00FF00",
             fg="blue",
             font=("arial", 12, "bold"),
-            width=18,
+            width=17,
             height=2,
         )
         boutonQuitter.grid(row=0, column=8)
@@ -454,7 +559,9 @@ class Hopital:
                 "numeroDeChambre",
                 "specialiteDuMedecin",
                 "coordonnesDuMedecin",
-                "date",
+                "jour",
+                "mois",
+                "annee",
                 "heure",
                 "nombreDeNuits",
                 "description"
@@ -478,7 +585,9 @@ class Hopital:
         self.hospitalTable.heading("numeroDeChambre", text="N° Chambre")
         self.hospitalTable.heading("specialiteDuMedecin", text="Spe du Med.")
         self.hospitalTable.heading("coordonnesDuMedecin", text="Coor du Med.")
-        self.hospitalTable.heading("date", text="Date")
+        self.hospitalTable.heading("jour", text="Jour")
+        self.hospitalTable.heading("mois", text="Mois")
+        self.hospitalTable.heading("annee", text="Annee")
         self.hospitalTable.heading("heure", text="Heure")
         self.hospitalTable.heading("nombreDeNuits", text="Nbre nuits")
         self.hospitalTable.heading("description", text="Description")
@@ -487,20 +596,22 @@ class Hopital:
 
         self.hospitalTable.pack(fill=BOTH, expand=1)
 
-        self.hospitalTable.column("numeroDImmatriculation", width=100)
-        self.hospitalTable.column("nom", width=100)
-        self.hospitalTable.column("prenom", width=100)
-        self.hospitalTable.column("age", width=100)
-        self.hospitalTable.column("sexe", width=100)
-        self.hospitalTable.column("adresse", width=100)
-        self.hospitalTable.column("service", width=100)
-        self.hospitalTable.column("numeroDeChambre", width=100)
-        self.hospitalTable.column("specialiteDuMedecin", width=100)
-        self.hospitalTable.column("coordonnesDuMedecin", width=100)
-        self.hospitalTable.column("date", width=90)
-        self.hospitalTable.column("heure", width=90)
-        self.hospitalTable.column("nombreDeNuits", width=90)
-        self.hospitalTable.column("description", width=100)
+        self.hospitalTable.column("numeroDImmatriculation", width=90)
+        self.hospitalTable.column("nom", width=90)
+        self.hospitalTable.column("prenom", width=90)
+        self.hospitalTable.column("age", width=90)
+        self.hospitalTable.column("sexe", width=90)
+        self.hospitalTable.column("adresse", width=90)
+        self.hospitalTable.column("service", width=90)
+        self.hospitalTable.column("numeroDeChambre", width=90)
+        self.hospitalTable.column("specialiteDuMedecin", width=90)
+        self.hospitalTable.column("coordonnesDuMedecin", width=90)
+        self.hospitalTable.column("jour", width=80)
+        self.hospitalTable.column("mois", width=80)
+        self.hospitalTable.column("annee", width=80)
+        self.hospitalTable.column("heure", width=80)
+        self.hospitalTable.column("nombreDeNuits", width=70)
+        self.hospitalTable.column("description", width=90)
 
         self.hospitalTable.pack(fill=BOTH, expand=1)
         self.hospitalTable.bind("<ButtonRelease-1>", self.get_cursor)
@@ -520,7 +631,7 @@ class Hopital:
             myCursor = conn.cursor()
 
             myCursor.execute(
-                "insert into nf06Hopital values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                "insert into nf06HopitalV2 values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
                 (
                     self.numeroDImmatriculation.get(),
                     self.nom.get(),
@@ -532,7 +643,9 @@ class Hopital:
                     self.numeroDeLaChambre.get(),
                     self.specialiteDuMedecin.get(),
                     self.coordoneeDuMedecin.get(),
-                    self.date.get(),
+                    self.jour.get(),
+                    self.mois.get(),
+                    self.annee.get(),
                     self.heure.get(),
                     self.nombreDeNuits.get(),
                     self.descriptionDeLaMaladie.get(),
@@ -553,7 +666,7 @@ class Hopital:
             database="nf06Hopital",
         )
         myCursor = conn.cursor()
-        myCursor.execute("select * from nf06Hopital")
+        myCursor.execute("select * from nf06HopitalV2")
 
         self.delete_all_rows()
 
@@ -564,6 +677,27 @@ class Hopital:
             conn.commit()
         conn.close()
 
+        ''''''
+        print(rows)
+        print("\n")
+
+        sortedRows = sorted(rows, reverse=True)
+        print(sortedRows)
+        print("\n")
+
+        '''
+        We have to work on Sorted. Sort it according to the option.
+        Then reinsert it on the hospitalTable using the follwing schema
+        
+        self.delete_all_rows
+        
+        if len(sortedRows) != 0:
+            for row in sortedRows:
+                self.hospitalTable.insert("", END, values=row)
+            conn.commit()
+        conn.close()
+        '''
+
     # ============================================================ #
     def iSupprimer(self):
         conn = mysql.connector.connect(
@@ -573,7 +707,7 @@ class Hopital:
             database="nf06Hopital",
         )
         myCursor = conn.cursor()
-        query = "delete from nf06Hopital where numeroDImmatriculation=%s"
+        query = "delete from nf06HopitalV2 where numeroDImmatriculation=%s"
         value = (self.numeroDImmatriculation.get(),)
         myCursor.execute(query, value)
 
@@ -605,12 +739,12 @@ class Hopital:
         self.numeroDeLaChambre.set(row[7])
         self.specialiteDuMedecin.set(row[8])
         self.coordoneeDuMedecin.set(row[9])
-        self.date.set(row[10])
-        self.heure.set(row[11])
-        self.nombreDeNuits.set(row[12])
-        self.descriptionDeLaMaladie.set(row[13])
-
-        self.prescription()
+        self.jour.set(row[10])
+        self.mois.set(row[11])
+        self.annee.set(row[12])
+        self.heure.set(row[13])
+        self.nombreDeNuits.set(row[14])
+        self.descriptionDeLaMaladie.set(row[15])
 
     # ============================================================= #
     def iModifier(self):
@@ -623,7 +757,7 @@ class Hopital:
         )
         myCursor = conn.cursor()
         myCursor.execute(
-            "update nf06Hopital set nom=%s,prenom=%s,age=%s,sexe=%s,adresse=%s,service=%s,numeroDeLaChambre=%s,specialiteDuMedecin=%s,coordoneeDuMedecin=%s,date=%s,heure=%s,nombreDeNuits=%s,description=%s where numeroDImmatriculation=%s",
+            "update nf06HopitalV2 set nom=%s,prenom=%s,age=%s,sexe=%s,adresse=%s,service=%s,numeroDeLaChambre=%s,specialiteDuMedecin=%s,coordoneeDuMedecin=%s,jour=%s,mois=%s,annee=%s,heure=%s,nombreDeNuits=%s,description=%s where numeroDImmatriculation=%s",
             (
                 self.nom.get(),
                 self.prenom.get(),
@@ -634,7 +768,9 @@ class Hopital:
                 self.numeroDeLaChambre.get(),
                 self.specialiteDuMedecin.get(),
                 self.coordoneeDuMedecin.get(),
-                self.date.get(),
+                self.jour.get(),
+                self.mois.get(),
+                self.annee.get(),
                 self.heure.get(),
                 self.nombreDeNuits.get(),
                 self.descriptionDeLaMaladie.get(),
@@ -646,55 +782,6 @@ class Hopital:
         self.ifetch_data()
         conn.close()
         messagebox.showinfo("Success", "Patient modifié avec success ✅")
-
-    # ==================================================================== #
-    def prescription(self):
-        self.textePrescription.delete("1.0", END)
-
-        self.textePrescription.insert(
-            END, "•N° Imma:\t\t" + self.numeroDImmatriculation.get() + "\n"
-        )
-        self.textePrescription.insert(
-            END, "•Nom:\t\t" + self.nom.get() + "\n"
-        )
-        self.textePrescription.insert(
-            END, "•Prenom:\t\t" + self.prenom.get() + "\n"
-        )
-        self.textePrescription.insert(
-            END, "•Age:\t\t" + self.age.get() + "\n"
-        )
-        self.textePrescription.insert(
-            END, "•Sexe:\t\t" + self.sexe.get() + "\n"
-        )
-        self.textePrescription.insert(
-            END, "•Adresse:\t\t" + self.adresse.get() + "\n"
-        )
-        self.textePrescription.insert(
-            END, "•Service:\t\t" + self.service.get() + "\n"
-        )
-        self.textePrescription.insert(
-            END, "•N° Chambre:\t\t" + self.numeroDeLaChambre.get() + "\n"
-        )
-        self.textePrescription.insert(
-            END, "•Spe Med:\t\t" + self.specialiteDuMedecin.get() + "\n"
-        )
-        self.textePrescription.insert(
-            END, "•Coor Med:\t\t" + self.coordoneeDuMedecin.get() + "\n"
-        )
-        self.textePrescription.insert(
-            END, "•Date:\t\t" + self.date.get() + "\n"
-        )
-        self.textePrescription.insert(
-            END, "•Heure:\t\t" + self.heure.get() + "\n"
-        )
-        self.textePrescription.insert(
-            END, "•Nbre nuits:\t\t" + self.nombreDeNuits.get() + "\n"
-        )
-        self.textePrescription.insert(
-            END, "•Description:\t\t" + self.descriptionDeLaMaladie.get() + "\n"
-        )
-
-        self.textePrescription.insert(END, "\n")
 
     # ==================================================================== #
     def iQuitter(self):
@@ -718,11 +805,11 @@ class Hopital:
         myCursor = conn.cursor()
 
         if option == "Nom":
-            myCursor.execute("select * from nf06Hopital where nom = %s", (self.recherche.get(),))
+            myCursor.execute("select * from nf06HopitalV2 where nom = %s", (self.recherche.get(),))
         elif option == "Penom":
-            myCursor.execute("select * from nf06Hopital where prenom = %s", (self.recherche.get(),))
+            myCursor.execute("select * from nf06HopitalV2 where prenom = %s", (self.recherche.get(),))
         elif option == "N° Imma.":
-            myCursor.execute("select * from nf06Hopital where numeroDImmatriculation = %s", (self.recherche.get(),))
+            myCursor.execute("select * from nf06HopitalV2 where numeroDImmatriculation = %s", (self.recherche.get(),))
 
         rows = myCursor.fetchall()
         if len(rows) != 0:
@@ -732,6 +819,7 @@ class Hopital:
         else:
             messagebox.showerror("Error", "Aucun patient correspondant")
         conn.close()
+
 
 # ================== Déclaration de notre TKinter====================#
 root = Tk()
