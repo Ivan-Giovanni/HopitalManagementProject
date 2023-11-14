@@ -451,7 +451,8 @@ class Hopital:
             "Rechercher par",
             "Nom",
             "Penom",
-            "N° Imma."
+            "N° Imma.",
+            "Annee"
         ]
 
         clickedRecherche = StringVar()
@@ -831,6 +832,8 @@ class Hopital:
             myCursor.execute("select * from nf06HopitalV3 where prenom = %s", (self.recherche.get(),))
         elif option == "N° Imma.":
             myCursor.execute("select * from nf06HopitalV3 where numeroDImmatriculation = %s", (self.recherche.get(),))
+        elif option == "Annee":
+            myCursor.execute("select * from nf06HopitalV3 where annee = %s", (self.recherche.get(),))
 
         rows = myCursor.fetchall()
         if len(rows) != 0:
@@ -900,14 +903,16 @@ class Hopital:
     def iDevis(self):
         self.devis.set(
             str((2600 * self.accouchement.get()) + (50 * self.bilanSante.get()) + \
-            (1250 * self.operationDuCanalCarpien.get()) + (35 * self.orl.get()) + \
-            (85 * self.echographie.get()) + (190 * self.coloscopie.get()) + \
-            (400 * self.irm.get()) + (68 * self.chambreIndividuelle.get() * self.nombreDeNuits.get()))
+                (1250 * self.operationDuCanalCarpien.get()) + (35 * self.orl.get()) + \
+                (85 * self.echographie.get()) + (190 * self.coloscopie.get()) + \
+                (400 * self.irm.get()) + (68 * self.chambreIndividuelle.get() * self.nombreDeNuits.get()))
         )
 
         self.iModifier()
 
         print("Devis = ", self.devis.get(), "\n")
+
+    # ==================================================================== #
 
 
 # ================== Déclaration de notre TKinter====================#
