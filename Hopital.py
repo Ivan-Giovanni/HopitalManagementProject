@@ -712,6 +712,16 @@ class Hopital:
         value = (self.numeroDImmatriculation.get(),)
         myCursor.execute(query, value)
 
+        cursor_row = self.hospitalTable.focus()
+        content = self.hospitalTable.item(cursor_row)
+        row = content["values"]
+
+        with open("DeletedPatients.txt", "a") as f:
+            f.write("\n")
+            f.write(str(row))
+
+        print("\nSUPPRESSION...\n", row)
+
         conn.commit()
         self.ifetch_data()
         conn.close()

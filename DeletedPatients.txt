@@ -1,2 +1,4 @@
 // ============================================== DELETED PATIENTS  ================================================== //
 
+['RE7456', 'Asake', 'Asake', 28, 'Masculin', 'Lagos, Nigeria', "Service d'urgence", 'D455', 'Radiologie', 'Lagos, Nigeria', 30, 3, 2022, 17, 3, 'Hemoragie', 0, 1, 0, 0, 1, 1, 0, 1, 529]
+['RE1212', 'Freezer', 'Bad', 30, 'Masculin', 'Lagos, Nigeria', 'Service de Consultation', 'C004', 'Chirurgie', 'LA, California, US', 11, 10, 2023, 19, 3, 'Blessures graves', 0, 1, 0, 1, 1, 0, 0, 1, 374]
