@@ -1,0 +1,34 @@
+Numero D'Immatriculation,Nom,Prenom,Age,Sexe,Adresse,Service,Numero De Chambre,Specialite du Medecin,Coordonnees du Medecin,Jour,Mois,Annee,Heure,Nombre de nuits,Description,Accouchement,Bilan Sante,Operation Du Canal Carpien,ORL,Echographie,Coloscopie,IRM,Chambre Individuelle,Devis
+RE0132,Bulma,Bulma,30,Feminin,"Yaounde, Cameroun",Service d'urgence,C220,Chirurgie,"Riyad, KSA",19,10,2023,19,5,Mal de dents,0,1,0,1,0,0,1,1,825
+RE0332,Buu,Majin,30,Masculin,"Douala, Cameroun",Service d'urgence,D445,Chirurgie,"Riyad, KSA",12,11,2023,1,2,Mal de dents,0,1,0,1,0,0,1,1,621
+RE0732,Goten,Goten,12,Masculin,"Cairo, Egypte",Service d'urgence,B220,Radiologie,"Riyad, KSA",19,9,2023,18,9,Problemes cutanes,0,1,0,0,0,0,1,1,1062
+RE0932,Cell,Cell,30,Masculin,"Libreville, Gabon",Service d'urgence,C555,Radiologie,"Malabo, GNQ",11,10,2023,12,4,Mal de pieds,0,1,0,0,0,1,0,1,512
+RE0942,Broly,Broly,30,Masculin,"Libreville, Gabon",Service d'urgence,B443,Radiologie,"Dakar, Senegal",21,4,2021,12,4,Mal de pieds,0,1,0,0,1,1,0,1,597
+RE0991,Sasuke,Uchiha,17,Masculin,"London, UK",Service d'urgence,C445,Gastrologie,"Marseille, France",3,7,2023,11,4,Hemoragie,0,1,1,0,0,1,0,1,1762
+RE1007,Megumi,Fushigoro,18,Masculin,"Abidjan, Cote d'Ivoire",Service d'urgence,D023,Radiologie,"Douala, Cameroun",4,4,2022,10,3,Manque de confiance en soi,0,1,0,1,0,0,1,1,689
+RE1100,Goku,Kakarot,19,Masculin,"London, UK",Service de Consultation,B222,Chirurgie,"Marseille, France",11,9,2022,22,0,Hemoragie interne,0,1,0,0,1,1,0,0,325
+RE1200,Geto,Suguru,28,Masculin,"Milan, Italy",Service d'urgence,B200,Radiologie,"Cap Town, SA",12,7,2023,9,10,Demons,0,1,0,1,1,1,1,1,1440
+RE1212,Freezer,Bad,30,Masculin,"Lagos, Nigeria",Service de Consultation,C004,Chirurgie,"LA, California, US",11,10,2023,19,3,Blessures graves,0,1,0,1,1,0,0,1,374
+RE1346,Tanjiro,Kamdo,18,Masculin,"Tokyo, Japan",Service d'urgence,B099,Generale,"Sao Paulo, Brazil",19,7,2023,16,4,Mal de dos,1,1,0,0,0,0,0,1,2922
+RE1456,Nobara,Kugisaki,17,Feminin,"Tokyo, Japan",Service d'urgence,A277,Chirurgie,"Johannesburg, SA",19,6,2023,16,4,Consultation prenatale,1,1,0,0,0,0,0,1,2922
+RE1567,Satoru,Gojo,28,Masculin,"Tokyo, Japan",Service d'urgence,B123,Generale,"Sydney, Australia",9,12,2023,15,10,Exces de puissance,0,1,0,0,0,0,1,1,1130
+RE1980,Israel,Adesanya,34,Masculin,"Lagos, Nigeria",Service de Consultation,B333,Radiologie,"Paris, France",11,6,2023,13,4,Douleurs musculaires,0,1,0,0,1,0,1,1,807
+RE2134,Vegeta,Prince,23,Masculin,"Manchester, UK",Service de Consultation,B221,Generale,"Mendong, Yaounde",12,12,2021,13,4,Mal de mains,0,1,0,0,1,0,0,1,407
+RE2135,Hinata,Hyuga,18,Feminin,"Madrid, Spain",Service de Consultation,C090,Gynecologie,"Barcelona, Spain",20,6,2022,9,20,Depression,1,1,1,1,0,0,0,1,5295
+RE2343,Sakura,Haruno,18,Feminin,"Akwa, Douala",Service de Consultation,B001,Generale,"16e, Paris",3,10,2022,12,4,Faiblesse,1,1,1,0,0,0,0,0,3900
+RE2456,Dangote,Aliko,66,Masculin,"Lagos, Nigeria",Service d'urgence,B322,Generale,"Lagos, Nigeria",29,6,2023,17,0,Trop d'argent,0,1,0,0,0,1,0,0,240
+RE3331,Muzan,Kibutsuji,27,Masculin,"Kyoto, Japan",Service d'urgence,A177,Gastrologie,"Pointe Noire, Congo",12,9,2023,12,5,Mal de ventre,0,1,1,0,0,0,0,1,1640
+RE3332,Gohan,Gohan,19,Masculin,"Kinshasa, RDC",Service d'urgence,A156,Radiologie,"Lubumbashi, RDC",11,10,2023,17,0,Mal de tete,0,1,0,1,0,0,0,0,85
+RE3732,Trunks,Trunks,12,Masculin,"Marrakesh, Maroc",Service d'urgence,A220,Chirurgie,"Tunis, Tunisie",15,8,2022,16,4,Mal de dos,0,1,0,1,0,0,0,1,357
+RE3980,Fally,Ipupa,45,Masculin,"Kinshasa, RDC",Service de Consultation,A444,Generale,"Paris, France",13,5,2021,12,2,Asthme,0,1,0,0,0,0,0,1,186
+RE4256,Rema,Divine,23,Masculin,"Lagos, Nigeria",Service d'urgence,D121,Gastrologie,"Lagos, Nigeria",13,8,2021,3,9,Mal de ventre,0,1,0,1,0,0,0,1,697
+RE4455,Kurosaki,Ichigo,17,Masculin,"London, UK",Service d'urgence,C445,Gastrologie,"Marseille, France",2,4,2023,11,4,Hemoragie,0,1,0,1,1,0,0,1,442
+RE4555,Wizkid,Ayo,30,Masculin,"Lagos, Nigeria",Service de Consultation,C332,Gastrologie,"Lagos, Nigeria",11,10,2021,7,1,Rhume,0,1,0,1,0,0,0,1,153
+RE4556,Burna,Boy,30,Masculin,"Lagos, Nigeria",Service de Consultation,D112,Generale,"Lagos, Nigeria",13,9,2021,6,4,Headache,0,1,0,1,0,0,0,1,357
+RE7256,Jazzy,Don,40,Masculin,"Lagos, Nigeria",Service d'urgence,A100,Radiologie,"Lagos, Nigeria",23,1,2022,15,10,Asthme,0,1,0,1,0,1,0,1,955
+RE7456,Asake,Asake,28,Masculin,"Lagos, Nigeria",Service d'urgence,D455,Radiologie,"Lagos, Nigeria",30,3,2022,17,3,Hemoragie,0,1,0,0,1,1,0,1,529
+RE8456,Ninho,Ni,26,Masculin,"Paris, France",Service d'urgence,E345,Generale,"Lagos, Nigeria",15,4,2023,17,3,Hemoragie,0,1,0,0,1,0,0,1,339
+RE8888,Sukuna,Ryomen,27,Masculin,"Beijin, China",Service de Consultation,C444,Gastrologie,"Taipei, Taiwan",14,11,2023,16,7,Troubles de l'esprit,0,1,0,0,0,0,0,1,526
+RE9446,Kanye,West,56,Masculin,"NYC, New York, US",Service d'urgence,A341,Chirurgie,"Alexandria, Egypte",13,9,2023,20,4,Aucun,0,1,0,0,0,0,0,1,322
+RE9456,Niska,Ni,27,Masculin,"Paris, France",Service d'urgence,E343,Generale,"Alexandria, Egypte",16,7,2023,18,4,Blessures,0,1,0,1,0,0,1,1,757
+RE9556,2Pac,Shakur,26,Masculin,"LA, California, US",Service d'urgence,E341,Chirurgie,"Alexandria, Egypte",12,7,2023,19,4,Blessures graves,0,1,1,1,1,1,1,1,2282
