@@ -946,8 +946,10 @@ class Hopital:
                                                   "Service", "Numero De Chambre", "Specialite du Medecin",
                                                   "Coordonnees du Medecin", "Jour", "Mois", "Annee", "Heure", "Nombre de nuits",
                                                   "Description", "Accouchement", "Bilan Sante", "Operation Du Canal Carpien",
-                                                  "ORL", "Echographie", "Coloscopie", "IRM", "Chambre Individuelle", "Devis"])
+                                                  "ORL", "Echographie", "Coloscopie", "IRM", "Chambre Individuelle", "Devis (EUR)"])
             fullDataFrame.to_csv("FullDataFrame.csv", index=False)
+
+            print(fullDataFrame)
 
 
 # ================== Déclaration de notre TKinter====================#
