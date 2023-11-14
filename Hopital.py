@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
+
 # ============================================== Définition de la classe Hopital ============================================= #
 
 class Hopital:
@@ -528,7 +529,8 @@ class Hopital:
         boutonStatistiques = Frame(Buttonframe, bd=5)
         boutonStatistiques.grid(row=0, column=6)
 
-        dropStatistiques = OptionMenu(boutonStatistiques, clickedStatistiques, *optionsStatistiques, command=self.iStatistiques)
+        dropStatistiques = OptionMenu(boutonStatistiques, clickedStatistiques, *optionsStatistiques,
+                                      command=self.iStatistiques)
         dropStatistiques.config(height=1, width=16, fg="blue", font=("arial", 12, "bold"))
         dropStatistiques.pack()
 
@@ -879,8 +881,6 @@ class Hopital:
                     self.hospitalTable.insert("", END, values=i)
                 conn.commit()
             conn.close()
-            print(sortedRows)
-            print("\n")
 
         if option == "Urgence":
             sortedRows = sorted(rows, key=lambda item: item[8], reverse=True)
@@ -927,8 +927,27 @@ class Hopital:
 
     # ==================================================================== #
     def iStatistiques(self, option):
-        pass
+        self.delete_all_rows()
 
+        conn = mysql.connector.connect(
+            host="localhost",
+            username="root",
+            password="GiovannI2004@",
+            database="nf06Hopital",
+        )
+        myCursor = conn.cursor()
+        myCursor.execute("select * from nf06HopitalV3")
+
+        rows = myCursor.fetchall()
+
+        if option == "Stat 1":
+            fullDataFrame = pd.DataFrame(rows,
+                                         columns=["Numero D'Immatriculation", "Nom", "Prenom", "Age", "Sexe", "Adresse",
+                                                  "Service", "Numero De Chambre", "Specialite du Medecin",
+                                                  "Coordonnees du Medecin", "Jour", "Mois", "Annee", "Heure", "Nombre de nuits",
+                                                  "Description", "Accouchement", "Bilan Sante", "Operation Du Canal Carpien",
+                                                  "ORL", "Echographie", "Coloscopie", "IRM", "Chambre Individuelle", "Devis"])
+            fullDataFrame.to_csv("FullDataFrame.csv", index=False)
 
 
 # ================== Déclaration de notre TKinter====================#
