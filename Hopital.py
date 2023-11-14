@@ -3,6 +3,9 @@ from tkinter import ttk
 from tkinter import messagebox
 import mysql.connector
 
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
 
 # ============================================== Définition de la classe Hopital ============================================= #
 
@@ -525,7 +528,7 @@ class Hopital:
         boutonStatistiques = Frame(Buttonframe, bd=5)
         boutonStatistiques.grid(row=0, column=6)
 
-        dropStatistiques = OptionMenu(boutonStatistiques, clickedStatistiques, *optionsStatistiques)
+        dropStatistiques = OptionMenu(boutonStatistiques, clickedStatistiques, *optionsStatistiques, command=self.iStatistiques)
         dropStatistiques.config(height=1, width=16, fg="blue", font=("arial", 12, "bold"))
         dropStatistiques.pack()
 
@@ -923,6 +926,9 @@ class Hopital:
         print("Devis = ", self.devis.get(), "\n")
 
     # ==================================================================== #
+    def iStatistiques(self, option):
+        pass
+
 
 
 # ================== Déclaration de notre TKinter====================#
