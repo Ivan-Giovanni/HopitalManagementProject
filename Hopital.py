@@ -945,22 +945,144 @@ class Hopital:
         rows = myCursor.fetchall()
 
         fullDf = pd.DataFrame(rows,
-                                     columns=["Numero D'Immatriculation", "Nom", "Prenom", "Age", "Sexe", "Adresse",
-                                              "Service", "Numero De Chambre", "Specialite du Medecin",
-                                              "Coordonnees du Medecin", "Jour", "Mois", "Annee", "Heure",
-                                              "Nombre de nuits",
-                                              "Description", "Accouchement", "Bilan Sante",
-                                              "Operation Du Canal Carpien",
-                                              "ORL", "Echographie", "Coloscopie", "IRM", "Chambre Individuelle",
-                                              "Devis (EUR)"])
+                              columns=["Numero D'Immatriculation", "Nom", "Prenom", "Age", "Sexe", "Adresse",
+                                       "Service", "Numero De Chambre", "Specialite du Medecin",
+                                       "Coordonnees du Medecin", "Jour", "Mois", "Annee", "Heure",
+                                       "Nombre de nuits",
+                                       "Description", "Accouchement", "Bilan Sante",
+                                       "Operation Du Canal Carpien",
+                                       "ORL", "Echographie", "Coloscopie", "IRM", "Chambre Individuelle",
+                                       "Devis (EUR)"])
         fullDf.to_csv("FullDataFrame.csv", index=False)
 
         print(fullDf)
 
         # ==================================================================== #
         if option == "Statistiques Generales":
-            fullDf.describe().to_csv("StatistiquesGenerales.csv", index=False)
+            fullDf.describe().to_csv("StatistiquesGenerales.csv", index=True)
+            messagebox.showinfo("Success", "Le fichier StatistiquesGenerales.csv a ete genere avec succes ✅")
 
+        # ==================================================================== #
+        if option == "Nombre de Patients par Sexe":
+            plt.style.use('default')
+            plt.figure(figsize=(15, 8))
+            plt.subplots_adjust(bottom=0.15)
+
+            fullDf["Sexe"].value_counts().plot(kind="bar", color=["darkcyan", "darkred"])
+            plt.title("Nombre de Patients par sexe",
+                      fontsize=16,
+                      fontweight="bold")
+
+            plt.show()
+
+        # ==================================================================== #
+        if option == "Nombre de Patients par Tranche d'Age":
+            plt.style.use('_mpl-gallery')
+
+            fig, ax = plt.subplots(figsize=(15, 8))
+            plt.subplots_adjust(left=0.057, right=0.97, bottom=0.076)
+
+            ax.hist(fullDf["Age"],
+                    bins=12,
+                    linewidth=0.5,
+                    edgecolor="white")
+
+            ax.set(xlim=(0, 81), xticks=np.arange(0, 81, 5),
+                   ylim=(0, 23), yticks=np.arange(0, 23, 2),
+                   xlabel="Age", ylabel="Nombre de Patients")
+
+            fig.suptitle(t="Nombre de Patients par Tranches d'Age", y=0.97, fontsize=16, fontweight="bold")
+
+            plt.show()
+
+        # ==================================================================== #
+        if option == "Nombre de Patients par Service":
+            plt.style.use('default')
+            plt.figure(figsize=(15, 8))
+            plt.subplots_adjust(left=0.18)
+
+            fullDf["Service"].value_counts().plot(kind="barh", color=["blue", "orange"])
+            plt.title("Nombre de Patients par Service",
+                      fontsize=16,
+                      fontweight="bold")
+
+            plt.show()
+
+        # ==================================================================== #
+        if option == "Nombre de Patients par Sexe et Service":
+            pd.crosstab(fullDf["Sexe"], fullDf["Service"]).plot(kind="bar",
+                                                                figsize=(15, 8),
+                                                                color=["darkmagenta", "green"])
+            plt.title("Nombre de patients par Sexe et Services",
+                      fontsize=16,
+                      fontweight="bold")
+
+            plt.subplots_adjust(bottom=0.15)
+
+            plt.show()
+
+        # ==================================================================== #
+        if option == "Pourcentage de Patients par Examen":
+            subDfExams = fullDf.drop(["Numero D'Immatriculation", "Nom", "Prenom", "Age", "Sexe", "Adresse",
+                                      "Service", "Numero De Chambre", "Specialite du Medecin",
+                                      "Coordonnees du Medecin", "Jour", "Mois", "Annee", "Heure", "Nombre de nuits",
+                                      "Description", "Devis (EUR)"],
+                                     axis=1)
+            subDfExams = subDfExams.sum()
+
+            fig, ax = plt.subplots(figsize=(17, 17))
+
+
+            ax.pie(x=subDfExams,
+                   labels=subDfExams.index,
+                   autopct='%1.1f%%')
+
+            fig.suptitle(t="Pourcentage de Patients par Examens", y=0.87, fontsize=20, fontweight="bold")
+
+            plt.show()
+
+        # ==================================================================== #
+        if option == "Sexe en fonction du Devis et de l'Age":
+            # Create the figure
+            plt.figure(figsize=(15, 8))
+
+            # Scatter where Sexe = Masculin
+            plt.scatter(fullDf.Age[fullDf.Sexe == "Masculin"],
+                        fullDf["Devis (EUR)"][fullDf.Sexe == "Masculin"],
+                        c="darkorange")
+
+            # Scatter where Sexe = Feminin
+            plt.scatter(fullDf.Age[fullDf.Sexe == "Feminin"],
+                        fullDf["Devis (EUR)"][fullDf.Sexe == "Feminin"],
+                        c="green")
+
+            plt.title("Sexe en fonction du Devis et de l'Age",
+                      fontsize=16,
+                      fontweight="bold")
+
+            plt.xlabel("Age")
+            plt.ylabel("Devis (EUR)")
+
+            plt.xticks(np.arange(0, 70, 5))
+            plt.yticks(np.arange(0, 55, 5))
+
+            plt.legend(["Masculin", "Feminin"], loc="upper left")
+
+            plt.grid(which='both', color='black', linestyle='--', linewidth=0.5)
+
+            plt.show()
+
+        # ==================================================================== #
+        if option == "Nombre de Patients par Annee":
+            plt.figure(figsize=(15, 8))
+
+            fullDf["Annee"].value_counts().plot(kind="bar")
+
+            plt.title("Nombre de Patients par Annee",
+                      fontsize=16,
+                      fontweight="bold")
+
+            plt.show()
 
 
 # ================== Déclaration de notre TKinter====================#
