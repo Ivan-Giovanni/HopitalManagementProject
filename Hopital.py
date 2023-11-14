@@ -517,10 +517,14 @@ class Hopital:
         # ===================================== #
         optionsStatistiques = [
             "Afficher Stats",
-            "Stat 1",
-            "Stat 2",
-            "Stat 3",
-            "Stat 4"
+            "Statistiques Generales",
+            "Nombre de Patients par Sexe",
+            "Nombre de Patients par Tranche d'Age",
+            "Nombre de Patients par Service",
+            "Nombre de Patients par Sexe et Service",
+            "Pourcentage de Patients par Examen",
+            "Sexe en fonction du Devis et de l'Age",
+            "Nombre de Patients par Annee"
         ]
 
         clickedStatistiques = StringVar()
@@ -940,16 +944,23 @@ class Hopital:
 
         rows = myCursor.fetchall()
 
-        if option == "Stat 1":
-            fullDataFrame = pd.DataFrame(rows,
-                                         columns=["Numero D'Immatriculation", "Nom", "Prenom", "Age", "Sexe", "Adresse",
-                                                  "Service", "Numero De Chambre", "Specialite du Medecin",
-                                                  "Coordonnees du Medecin", "Jour", "Mois", "Annee", "Heure", "Nombre de nuits",
-                                                  "Description", "Accouchement", "Bilan Sante", "Operation Du Canal Carpien",
-                                                  "ORL", "Echographie", "Coloscopie", "IRM", "Chambre Individuelle", "Devis (EUR)"])
-            fullDataFrame.to_csv("FullDataFrame.csv", index=False)
+        fullDf = pd.DataFrame(rows,
+                                     columns=["Numero D'Immatriculation", "Nom", "Prenom", "Age", "Sexe", "Adresse",
+                                              "Service", "Numero De Chambre", "Specialite du Medecin",
+                                              "Coordonnees du Medecin", "Jour", "Mois", "Annee", "Heure",
+                                              "Nombre de nuits",
+                                              "Description", "Accouchement", "Bilan Sante",
+                                              "Operation Du Canal Carpien",
+                                              "ORL", "Echographie", "Coloscopie", "IRM", "Chambre Individuelle",
+                                              "Devis (EUR)"])
+        fullDf.to_csv("FullDataFrame.csv", index=False)
 
-            print(fullDataFrame)
+        print(fullDf)
+
+        # ==================================================================== #
+        if option == "Statistiques Generales":
+            fullDf.describe().to_csv("StatistiquesGenerales.csv", index=False)
+
 
 
 # ================== Déclaration de notre TKinter====================#
