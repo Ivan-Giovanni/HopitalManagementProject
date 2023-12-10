@@ -7,14 +7,23 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
+from playsound import playsound
+import threading
+
 
 # ============================================== Définition de la classe Hopital ============================================= #
 
 class Hopital:
     def __init__(self, root):
+
+        # =========================== Playing sound ================================ #
+        soundFilePath = "01. Ground Theme.mp3"
+        soundThread = threading.Thread(target=playsound, args=(soundFilePath,))
+        soundThread.start()
+
         # ==================================== Définition de la fenêtre ====================================================== #
         self.root = root
-        self.root.title("Hopital Les Genies Management System")
+        self.root.title("Premium Hospital")
         self.root.geometry("1540x800+0+0")
 
         # =========== Déclaration des variables ======================== #
@@ -76,8 +85,8 @@ class Hopital:
             self.root,
             bd=20,
             relief=RIDGE,
-            text="HOPITAL LES GENIES MANAGEMENT SYSTEM",
-            fg="red",
+            text="🏥 PREMIUM HOSPITAL 🏆",
+            fg="#b8860b",
             bg="white",
             font=("times new roman", 50, "bold"),
         )
@@ -1031,7 +1040,6 @@ class Hopital:
             subDfExams = subDfExams.sum()
 
             fig, ax = plt.subplots(figsize=(17, 17))
-
 
             ax.pie(x=subDfExams,
                    labels=subDfExams.index,
