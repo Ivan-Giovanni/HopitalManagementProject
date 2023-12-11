@@ -656,7 +656,7 @@ class Hopital:
             conn = mysql.connector.connect(
                 host="localhost",
                 username="root",
-                password="GiovannI2004@",  # Utilise ton propre mot de passe
+                password="password@",  # Utilise ton propre mot de passe
                 database="nf06Hopital",  # Nomme exactement comme dans mySQL Workbench
             )
             myCursor = conn.cursor()
@@ -702,7 +702,7 @@ class Hopital:
         conn = mysql.connector.connect(
             host="localhost",
             username="root",
-            password="GiovannI2004@",
+            password="password",
             database="nf06Hopital",
         )
         myCursor = conn.cursor()
@@ -722,7 +722,7 @@ class Hopital:
         conn = mysql.connector.connect(
             host="localhost",
             username="root",
-            password="GiovannI2004@",
+            password="password@",
             database="nf06Hopital",
         )
         myCursor = conn.cursor()
@@ -790,7 +790,7 @@ class Hopital:
         conn = mysql.connector.connect(
             host="localhost",
             username="root",
-            password="GiovannI2004@",
+            password="password",
             database="nf06Hopital",
         )
         myCursor = conn.cursor()
@@ -849,7 +849,7 @@ class Hopital:
         conn = mysql.connector.connect(
             host="localhost",
             username="root",
-            password="GiovannI2004@",
+            password="password",
             database="nf06Hopital",
         )
         myCursor = conn.cursor()
@@ -879,7 +879,7 @@ class Hopital:
         conn = mysql.connector.connect(
             host="localhost",
             username="root",
-            password="GiovannI2004@",
+            password="password",
             database="nf06Hopital",
         )
         myCursor = conn.cursor()
@@ -945,7 +945,7 @@ class Hopital:
         conn = mysql.connector.connect(
             host="localhost",
             username="root",
-            password="GiovannI2004@",
+            password="password",
             database="nf06Hopital",
         )
         myCursor = conn.cursor()
